@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
 import ThemeSelect from "../ThemeSelect/ThemeSelect";
-
 import {
   Header,
   NavBar,
@@ -16,7 +14,6 @@ const Home = (): JSX.Element => {
   const [valueInputTitle, setValueInputTitle] = useState("");
   const [valueInputArea, setValueInputArea] = useState("");
   const [valueInputTheme, setValueInputTheme] = useState("gaming");
-
   const handleInput = (even: any) => {
     setValueInputTitle(even.target.value);
   };
@@ -26,7 +23,6 @@ const Home = (): JSX.Element => {
   const handleSelect = (event: any) => {
     setValueInputTheme(event.target.value);
   };
-
   return (
     <>
       <Header>
@@ -49,7 +45,6 @@ const Home = (): JSX.Element => {
             <h4>Give a description to your event </h4>
             <textarea
               value={valueInputArea}
-              type="texte"
               onChange={handleArea}
             />
             <Link
@@ -62,7 +57,7 @@ const Home = (): JSX.Element => {
                 },
               }}
             >
-              <Button alt="Next">NEXT</Button>
+              <Button>NEXT</Button>
             </Link>
           </CreationContainer>
         </LastContainer>
@@ -70,5 +65,4 @@ const Home = (): JSX.Element => {
     </>
   );
 };
-
 export default Home;
