@@ -28,7 +28,7 @@ describe("Home display the create event form", () => {
         <Home />
       </BrowserRouter>
     );
-    expect(screen.getByRole("heading", { level: 4 })).toHaveLength(3);
+    expect(screen.getAllByRole("heading", { level: 4 })).toHaveLength(3);
   });
 });
 
