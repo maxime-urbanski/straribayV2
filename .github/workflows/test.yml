@@ -1,0 +1,22 @@
+name: test component
+
+on:
+  push:
+    branches: main
+
+jobs:
+  test-component:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Login Docker
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Pull Docker Image
+        run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/straribay_front
+      - name: Run npm test
+        run: |
+          docker run ${{ secrets.DOCKERHUB_USERNAME }}/straribay_front sh 
+          npm run test
