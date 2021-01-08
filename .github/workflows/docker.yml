@@ -17,8 +17,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build & Push
         run: |
-          cd front
-          docker build -t ${{ secrets.DOCKERHUB_REPO_FRONT }} .
-          docker push ${{ secrets.DOCKERHUB_REPO_FRONT }}
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+          docker-compose build
+          docker-compose push
+      
