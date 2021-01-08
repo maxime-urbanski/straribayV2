@@ -3,7 +3,15 @@ import React from "react";
 import { Card } from "../../styles/containers";
 import { Button } from "../../styles/elements";
 
-function EventCard({ title, date, hour, author, description, infos, image }: any) {
+function EventCard({
+  title,
+  date,
+  hour,
+  author,
+  description,
+  infos,
+  image,
+}: any) {
   return (
     <Card>
       <div>
