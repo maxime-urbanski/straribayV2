@@ -1,33 +1,20 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import Home from "./Home";
-import { BrowserRouter } from "react-router-dom";
 
 describe("Home display the create event form", () => {
   it("renders a create event title", () => {
-    render(
-      <BrowserRouter>
-        <Home />
-      </BrowserRouter>
-    );
+    render(<Home />);
     expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent(
       "Create your Event"
     );
   });
   it("has a Button next", () => {
-    render(
-      <BrowserRouter>
-        <Home />
-      </BrowserRouter>
-    );
+    render(<Home />);
     expect(screen.getByRole("button")).toHaveTextContent("NEXT");
   });
   it("renders three h4 subtitles", () => {
-    render(
-      <BrowserRouter>
-        <Home />
-      </BrowserRouter>
-    );
+    render(<Home />);
     expect(screen.getAllByRole("heading", { level: 4 })).toHaveLength(3);
   });
 });

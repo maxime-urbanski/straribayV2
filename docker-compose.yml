@@ -1,0 +1,22 @@
+services:
+  mongodb:
+    image: mongo
+    volumes:
+      - /data/db:/data/db:rw
+
+  straribay_back:
+    image: vincefritsch/straribay_back
+    build: ./back
+    ports:
+      - 4000:7777
+    volumes:
+      - /data:/data
+
+  straribay_front:
+    image: vincefritsch/straribay_front
+    build: ./front
+    ports:
+      - 80:3000
+
+volumes:
+  data:
