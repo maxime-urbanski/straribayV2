@@ -16,10 +16,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Pull Docker Image
         run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/straribay_front
+      - name: Run image
+        run: docker-compose up
       - name: Run npm test
-        run: |
-          docker run ${{ secrets.DOCKERHUB_USERNAME }}/straribay_front sh 
-          npm run test
+        run: docker-compose exec -T straribay_front npm run test
 
   test-back:
     runs-on: ubuntu-latest
