@@ -38,13 +38,14 @@ function Router() {
       <Switch>
         <RouteWrapper exact path="/" component={Home} layout={Layout} />
         <RouteWrapper
-          path="/ChooseInfo"
+          path="/chooseInfo"
           component={ChooseInfo}
           layout={Layout}
         />
         <RouteWrapper path="/events" component={EventList} layout={Layout} />
-        <RouteWrapper path="/Invit" component={ChooseInvit} layout={Layout} />
-        <RouteWrapper path="/Details" component={EventDetail} layout={Layout} />
+        <RouteWrapper path="/invit" component={ChooseInvit} layout={Layout} />
+        <RouteWrapper path="/details" component={EventDetail} layout={Layout} />
+        <RouteWrapper path="/event-list" component={EventList} layout={Layout} />
       </Switch>
     </BrowserRouter>
   );
