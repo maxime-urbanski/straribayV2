@@ -15,7 +15,9 @@ return (
       </div>
     </Header>
     <BottomContainer>
-      <NavBar>Hello</NavBar>
+      <NavBar>
+        <img alt='calendar' />
+      </NavBar>
       <LastContainer>
         {children}
       </LastContainer>
