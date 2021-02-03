@@ -1,0 +1,10 @@
+svg {
+  fill: white;
+  width: 56px;
+  height: 56px;
+  margin-top: 40px;
+}
+
+svg:hover {
+  fill: #FC8948;
+}

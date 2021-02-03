@@ -7,7 +7,7 @@ import eventList from "../../Data";
 function EventList() {
   return (
     <>
-      <Title>Create your Event</Title>
+      <Title>List of available events</Title>
       {eventList.map((event) => (
         <EventCard
           key={event.id}
