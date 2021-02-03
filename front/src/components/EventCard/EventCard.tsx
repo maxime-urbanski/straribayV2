@@ -3,15 +3,27 @@ import React from "react";
 import { Card } from "../../styles/containers";
 import { Button } from "../../styles/elements";
 
-function EventCard({
+interface IEvent {
+  title: string;
+  theme: string;
+  date: string;
+  hour: string;
+  author: string;
+  description: string;
+  infos: string | undefined;
+  image: string;
+}
+
+const EventCard: React.FC<IEvent> = ({
   title,
+  theme,
   date,
   hour,
   author,
   description,
   infos,
   image,
-}: any) {
+}) => {
   return (
     <Card>
       <div>
@@ -30,6 +42,6 @@ function EventCard({
       </div>
     </Card>
   );
-}
+};
 
 export default EventCard;

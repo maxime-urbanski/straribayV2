@@ -2,6 +2,7 @@ const eventList = [
   {
     id: 1,
     title: "Gaming",
+    theme: "Gaming",
     date: "11/12/20",
     hour: "15h30",
     author: "Robin",
@@ -12,6 +13,7 @@ const eventList = [
   {
     id: 2,
     title: "Cooking",
+    theme: "prout",
     date: "10/12/20",
     hour: "19h",
     author: "Maxime",
@@ -22,6 +24,7 @@ const eventList = [
   {
     id: 3,
     title: "Dev",
+    theme: "prouty",
     date: "09/11/20",
     hour: "10h15",
     author: "Vincent",
@@ -32,6 +35,7 @@ const eventList = [
   {
     id: 4,
     title: "Politics",
+    theme: "akajhd",
     date: "27/11/20",
     hour: "17h00",
     author: "David",
@@ -42,6 +46,7 @@ const eventList = [
   {
     id: 5,
     title: "witchcraft",
+    theme: "hufb",
     date: "30/11/20",
     hour: "18h00",
     author: "Justine",

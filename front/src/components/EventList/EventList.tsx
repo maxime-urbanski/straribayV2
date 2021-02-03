@@ -12,6 +12,7 @@ function EventList() {
         <EventCard
           key={event.id}
           title={event.title}
+          theme={event.theme}
           date={event.date}
           hour={event.hour}
           author={event.author}

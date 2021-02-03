@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose, { Document } from 'mongoose';
 import { ApolloServer, gql } from 'apollo-server-express';
 import User from './models/User';
+import Event from './models/Event';
 
 const app = express();
 const port = 7777;
@@ -13,6 +14,17 @@ const typeDefs = gql`
     email: String
   }
 
+  input InputEvent {
+    title: String
+    theme: String
+    date: Date
+    hour: String
+    author: String
+    description: String
+    infos: String
+    image: String
+  }
+
   type User {
     _id: String
     firstname: String
@@ -20,19 +32,44 @@ const typeDefs = gql`
     email: String
   }
 
+  type Event {
+    _id: String
+    title: String
+    theme: String
+    date: Date
+    hour: String
+    author: String
+    description: String
+    infos: String
+    image: String
+  }
+
   type Query {
     getUser(email: String): User
     getUsers: [User]
+    getEvent(_id: String): Event
+    getEvents: [Event]
   }
 
   type Mutation {
     addUser(firstname: String!, lastname: String!, email: String!): User
+    addEvent(title: String!, date: Date!, hour: String!, author: String, description: String, infos: String, image: String)
   }
 `;
+interface InputEvent extends Document {
+  title: string
+  theme: string
+  date: Date
+  hour: string
+  author?: string
+  description: string
+  infos: string
+  image: string
+}
 interface InputUser extends Document {
-  firstname: string;
-  lastname: string;
-  email: string;
+  firstname: string
+  lastname: string
+  email: string
 }
 
 const resolvers = {
@@ -44,6 +81,12 @@ const resolvers = {
       return user;
     },
     getUsers: async () => User.find({}),
+    getEvent: async (_: unknown, { _id }: { _id: string}) => {
+      console.log('id', _id);
+      const event = await Event.findOne({ _id });
+      return event;
+    },
+    getEvents: async () => Event.find({}),
   },
 
   Mutation: {
@@ -57,6 +100,16 @@ const resolvers = {
         return e.message;
       }
     },
+    addEvent: async (_: unknown, args: InputEvent) => {
+      try {
+        const response = await Event.create(args);
+        // eslint-disable-next-line no-console
+        console.log(response, args, args);
+        return response;
+      } catch (e) {
+        return e.message;
+      }
+    }
   },
 };
 

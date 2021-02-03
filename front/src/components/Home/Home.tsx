@@ -5,7 +5,6 @@ import {
   CreationContainer,
 } from "../../styles/containers";
 import { Button, Title } from "../../styles/elements";
-import s from './home.module.css';
 
 const Home = (): JSX.Element => {
   const [valueInputTitle, setValueInputTitle] = useState("");
@@ -22,7 +21,7 @@ const Home = (): JSX.Element => {
   };
   return (
     <>
-      <Title className={s.title}>Create your Event</Title>
+      <Title>Create your Event</Title>
       <CreationContainer>
         <h4>Give a title to your event</h4>
         <input value={valueInputTitle} type="text" onChange={handleInput} />
