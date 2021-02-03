@@ -17,6 +17,9 @@ services:
     build: ./front
     ports:
       - 80:3000
+    volumes:
+      - ./front/src:/app/src:rw
+      - ./front/public:/app/public:rw
 
 volumes:
   data:
