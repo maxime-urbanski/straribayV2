@@ -21,6 +21,7 @@ services:
     volumes:
       - ./front/src:/app/src:rw
       - ./front/public:/app/public:rw
+      - /app/front/node_modules
 
 volumes:
   data:

@@ -5,6 +5,8 @@ import { CreationContainer } from "../../styles/containers";
 import { Title, Button } from "../../styles/elements";
 import eventList from "../../Data";
 
+import { ApolloClient, InMemoryCache, UseQuery } from '@apollo/client';
+
 const Details = (props: any) => {
   // eslint-disable-next-line react/destructuring-assignment
   const { attending, userSelected, event } = props.location.state;

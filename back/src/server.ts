@@ -126,7 +126,7 @@ server.applyMiddleware({ app });
 
 const start = async () => {
   try {
-    await mongoose.connect('mongodb://mongodb:27017/virtualschool', {
+    await mongoose.connect('mongodb://mongodb:27017/virtualschool' ||'mongodb://127.0.0.1:27017/virtualschool' , {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
