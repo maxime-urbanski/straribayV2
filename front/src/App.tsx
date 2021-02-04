@@ -1,14 +1,21 @@
 import Router from "./Router";
 
 import { ThemeProvider } from "styled-components";
+import {ApolloClient, ApolloProvider, InMemoryCache, gql} from "@apollo/client";
 
 import theme from "./styles/theme";
 
-function App() {
+const App = (): JSX.Element => {
+  const client = new ApolloClient({
+  uri: 'https://localhost:7777/graphql',
+  cache: new InMemoryCache()
+})
   return (
-    <ThemeProvider theme={theme}>
-      <Router />
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <Router />
+      </ThemeProvider>
+    </ApolloProvider>
   );
 }
 
