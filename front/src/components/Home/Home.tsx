@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
 import ThemeSelect from "../ThemeSelect/ThemeSelect";
-import {
-  CreationContainer,
-} from "../../styles/containers";
+import { CreationContainer } from "../../styles/containers";
 import { Button, Title } from "../../styles/elements";
 
 const Home = (): JSX.Element => {
