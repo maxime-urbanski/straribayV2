@@ -3,45 +3,45 @@ import * as mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 export interface EnventModel extends mongoose.Document {
-  title: string,
-  date: Date,
-  hour: string
-  author: string,
-  description: string
-  infos: string
-  image: string
+  title: string;
+  date: Date;
+  hour: string;
+  author: string;
+  description: string;
+  infos: string;
+  image: string;
 }
 
 const eventSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: Date,
     required: true,
-    default: new Date()
+    default: new Date(),
   },
   hour: {
     type: String,
-    required: true
+    required: true,
   },
   author: {
     type: String,
-    required: true
+    required: false,
   },
   description: {
     type: String,
-    required: false
+    required: false,
   },
   infos: {
     type: String,
-    required: false
+    required: false,
   },
   image: {
     type: String,
-    required: false
-  }
+    required: false,
+  },
 });
 
 const Event = mongoose.model('event', eventSchema);
