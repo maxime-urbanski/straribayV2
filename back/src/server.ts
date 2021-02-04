@@ -8,6 +8,7 @@ const app = express();
 const port = 7777;
 
 const typeDefs = gql`
+  scalar Time
   input InputUser {
     firstname: String
     lastname: String
@@ -17,7 +18,7 @@ const typeDefs = gql`
   input InputEvent {
     title: String
     theme: String
-    date: Date
+    date: Time
     hour: String
     author: String
     description: String
@@ -36,7 +37,7 @@ const typeDefs = gql`
     _id: String
     title: String
     theme: String
-    date: Date
+    date: Time
     hour: String
     author: String
     description: String
@@ -53,7 +54,7 @@ const typeDefs = gql`
 
   type Mutation {
     addUser(firstname: String!, lastname: String!, email: String!): User
-    addEvent(title: String!, date: Date!, hour: String!, author: String, description: String, infos: String, image: String)
+    addEvent(title: String!, date: Time!, hour: String!, author: String, description: String, infos: String, image: String): Event
   }
 `;
 interface InputEvent extends Document {

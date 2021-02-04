@@ -11,6 +11,7 @@ services:
       - 4000:7777
     volumes:
       - /data:/data
+      - ./back:/app/back:rw
 
   straribay_front:
     image: vincefritsch/straribay_front
