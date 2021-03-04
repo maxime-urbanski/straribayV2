@@ -1,11 +1,13 @@
 import express from 'express';
 import mongoose, { Document } from 'mongoose';
 import { ApolloServer, gql } from 'apollo-server-express';
+import cors from 'cors';
 import User from './models/User';
 import Event from './models/Event';
 
 const app = express();
 const port = 7777;
+app.use(cors());
 
 const typeDefs = gql`
   scalar Time
@@ -18,7 +20,7 @@ const typeDefs = gql`
   input InputEvent {
     title: String
     theme: String
-    date: Time
+    date: String
     hour: String
     author: String
     description: String
@@ -37,7 +39,7 @@ const typeDefs = gql`
     _id: String
     title: String
     theme: String
-    date: Time
+    date: String
     hour: String
     author: String
     description: String
@@ -54,23 +56,31 @@ const typeDefs = gql`
 
   type Mutation {
     addUser(firstname: String!, lastname: String!, email: String!): User
-    addEvent(title: String!, date: Time!, hour: String!, author: String, description: String, infos: String, image: String): Event
+    addEvent(
+      title: String!
+      date: String!
+      hour: String!
+      author: String
+      description: String
+      infos: String
+      image: String
+    ): Event
   }
 `;
 interface InputEvent extends Document {
-  title: string
-  theme: string
-  date: Date
-  hour: string
-  author?: string
-  description: string
-  infos: string
-  image: string
+  title: string;
+  theme: string;
+  date: string;
+  hour: string;
+  author?: string;
+  description: string;
+  infos: string;
+  image: string;
 }
 interface InputUser extends Document {
-  firstname: string
-  lastname: string
-  email: string
+  firstname: string;
+  lastname: string;
+  email: string;
 }
 
 const resolvers = {
@@ -82,7 +92,7 @@ const resolvers = {
       return user;
     },
     getUsers: async () => User.find({}),
-    getEvent: async (_: unknown, { _id }: { _id: string}) => {
+    getEvent: async (_: unknown, { _id }: { _id: string }) => {
       console.log('id', _id);
       const event = await Event.findOne({ _id });
       return event;
@@ -103,14 +113,15 @@ const resolvers = {
     },
     addEvent: async (_: unknown, args: InputEvent) => {
       try {
+        console.log('pas helooooooo', args);
         const response = await Event.create(args);
         // eslint-disable-next-line no-console
-        console.log(response, args, args);
+        console.log('helooooooooo', response, args);
         return response;
       } catch (e) {
         return e.message;
       }
-    }
+    },
   },
 };
 
@@ -119,12 +130,16 @@ server.applyMiddleware({ app });
 
 const start = async () => {
   try {
-    await mongoose.connect('mongodb://mongodb:27017/virtualschool' ||'mongodb://127.0.0.1:27017/virtualschool' , {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      autoIndex: true,
-    });
+    await mongoose.connect(
+      'mongodb://127.0.0.1:27017/virtualschool' ||
+        'mongodb://mongodb:27017/virtualschool',
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        autoIndex: true,
+      }
+    );
     // eslint-disable-next-line no-console
     console.log('Connected to database');
     app.listen(port, () =>
