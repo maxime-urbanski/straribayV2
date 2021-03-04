@@ -54,23 +54,31 @@ const typeDefs = gql`
 
   type Mutation {
     addUser(firstname: String!, lastname: String!, email: String!): User
-    addEvent(title: String!, date: Time!, hour: String!, author: String, description: String, infos: String, image: String): Event
+    addEvent(
+      title: String!
+      date: Time!
+      hour: String!
+      author: String
+      description: String
+      infos: String
+      image: String
+    ): Event
   }
 `;
 interface InputEvent extends Document {
-  title: string
-  theme: string
-  date: Date
-  hour: string
-  author?: string
-  description: string
-  infos: string
-  image: string
+  title: string;
+  theme: string;
+  date: Date;
+  hour: string;
+  author?: string;
+  description: string;
+  infos: string;
+  image: string;
 }
 interface InputUser extends Document {
-  firstname: string
-  lastname: string
-  email: string
+  firstname: string;
+  lastname: string;
+  email: string;
 }
 
 const resolvers = {
@@ -82,8 +90,7 @@ const resolvers = {
       return user;
     },
     getUsers: async () => User.find({}),
-    getEvent: async (_: unknown, { _id }: { _id: string}) => {
-      console.log('id', _id);
+    getEvent: async (_: unknown, { _id }: { _id: string }) => {
       const event = await Event.findOne({ _id });
       return event;
     },
@@ -110,7 +117,7 @@ const resolvers = {
       } catch (e) {
         return e.message;
       }
-    }
+    },
   },
 };
 
