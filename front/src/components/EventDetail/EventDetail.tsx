@@ -7,9 +7,9 @@ import eventList from "../../Data";
 
 import { gql, useMutation } from '@apollo/client';
 
-const Add_Event = gql`
-mutation AddEvent($title: String!, $date: Time!, $hour: String, $author: String, $description: String, $infos: String, $image: Sring) {
-  addEvent(title: $title, date: $date, hour: $hour, author: $author, description: $description, infos: $infos, image: $image) {
+const ADD_EVENT = gql`
+mutation AddEvent($title: String!, $date: Time!, $hour: String, $author: String, $description: String, $infos: String, $image: Sring, $theme: String) {
+  addEvent(title: $title, date: $date, hour: $hour, author: $author, description: $description, infos: $infos, image: $image, theme: $theme) {
     title
     date
     hour
@@ -17,6 +17,7 @@ mutation AddEvent($title: String!, $date: Time!, $hour: String, $author: String,
     description
     infos
     image
+    theme
   }
 } 
 `
@@ -26,7 +27,7 @@ const Details = (props: any) => {
     const { title, description, theme, date, hour, info } = event;
       event.id = eventList.length + 1;
     // eslint-disable-next-line react/destructuring-assignment
-    const [addEvent, {data}] = useMutation(Add_Event);
+    const [addEvent, {data}] = useMutation(ADD_EVENT);
 
     console.log(title);
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
@@ -38,7 +39,8 @@ const Details = (props: any) => {
         author: "Vince",
         description: description,
         infos: info,
-        image: "test image"
+        image: "test image",
+        theme: theme
       }})      
     } 
     ;
@@ -55,11 +57,11 @@ const Details = (props: any) => {
         <h3>{hour}</h3>
         <h3>{info}</h3>
         <h3>
-          Only
+          Only <span></span>
           {attending} can attend
         </h3>
         <h3>
-          You&apos;ve invited
+          You&apos;ve invited <span></span>
           {userSelected}
         </h3>
         <Link

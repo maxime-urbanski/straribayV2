@@ -39,7 +39,7 @@ const typeDefs = gql`
     _id: String
     title: String
     theme: String
-    date: String
+    date: Time
     hour: String
     author: String
     description: String
@@ -64,6 +64,7 @@ const typeDefs = gql`
       description: String
       infos: String
       image: String
+      theme: String
     ): Event
   }
 `;
