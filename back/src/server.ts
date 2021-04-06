@@ -62,6 +62,7 @@ const typeDefs = gql`
       description: String
       infos: String
       image: String
+      theme: String
     ): Event
   }
 `;
