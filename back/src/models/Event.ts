@@ -19,7 +19,7 @@ const eventSchema = new Schema({
   },
   date: {
     type: Date,
-    required: true,
+    required: false,
     default: new Date(),
   },
   hour: {

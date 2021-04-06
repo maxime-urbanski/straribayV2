@@ -58,7 +58,7 @@ const typeDefs = gql`
     addUser(firstname: String!, lastname: String!, email: String!): User
     addEvent(
       title: String!
-      date: String!
+      date: String
       hour: String!
       author: String
       description: String
@@ -131,9 +131,8 @@ server.applyMiddleware({ app });
 const start = async () => {
   try {
     await mongoose.connect(
-      'mongodb://127.0.0.1:27017/virtualschool' ||
-        'mongodb://mongodb:27017/virtualschool',
-      {
+      'mongodb://127.0.0.1:27017/virtualschool',
+      /* ||'mongodb://mongodb:27017/virtualschool' */ {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
