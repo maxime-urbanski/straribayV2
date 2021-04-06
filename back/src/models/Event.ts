@@ -10,6 +10,7 @@ export interface EnventModel extends mongoose.Document {
   description: string;
   infos: string;
   image: string;
+  theme: string;
 }
 
 const eventSchema = new Schema({
@@ -42,6 +43,10 @@ const eventSchema = new Schema({
     type: String,
     required: false,
   },
+  theme: {
+    type: String,
+    required: false,
+  }
 });
 
 const Event = mongoose.model('event', eventSchema);
