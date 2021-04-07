@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import express from 'express';
 import mongoose, { Document } from 'mongoose';
 import { ApolloServer, gql } from 'apollo-server-express';
@@ -57,9 +58,9 @@ const typeDefs = gql`
   type Mutation {
     addUser(firstname: String!, lastname: String!, email: String!): User
     addEvent(
-      title: String!
-      date: String
-      hour: String!
+      title: String
+      date: Time
+      hour: String
       author: String
       description: String
       infos: String

@@ -8,8 +8,8 @@ import theme from "./styles/theme";
 
 const App = (): JSX.Element => {
   const client = new ApolloClient({
-  uri: 'https://localhost:7777/graphql',
-  cache: new InMemoryCache()
+  uri: 'http://localhost:7777/graphql',
+  cache: new InMemoryCache(),
 })
   return (
     <ApolloProvider client={client}>

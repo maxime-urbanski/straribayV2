@@ -1,17 +1,18 @@
 import React from "react";
 
-import { Card } from "../../styles/containers";
+import { Card, CardBody,CardTitle } from "../../styles/containers";
 import { Button } from "../../styles/elements";
 
-interface IEvent {
+export interface IEvent {
+  _id?: string
   title: string;
   theme: string;
-  date: string;
+  date: Date| string | any;
   hour: string;
-  author: string;
+  
   description: string;
   infos: string | undefined;
-  image: string;
+  
 }
 
 const EventCard: React.FC<IEvent> = ({
@@ -19,26 +20,27 @@ const EventCard: React.FC<IEvent> = ({
   theme,
   date,
   hour,
-  author,
   description,
   infos,
-  image,
+  
 }) => {
   return (
     <Card>
-      <div>
-        <h3>{title}</h3>
-        <span>
+      <CardTitle>
+        {title}
+      </CardTitle>
+      <CardBody>
+        <span style={{paddingLeft: "15px"}}>{theme}</span>
+        <span style={{paddingLeft: "15px"}}>
           {date} {hour}
-        </span>
-        <span>{author}</span>
-        <span>{description}</span>
-        <span>{infos}</span>
-        <span>{image}</span>
-      </div>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <Button>ATTEND</Button>
-        <Button>DETAILS</Button>
+        </span>        
+        <span style={{paddingLeft: "15px"}}>{description}</span>
+        <span style={{paddingLeft: "15px"}}>{infos}</span>        
+      </CardBody>        
+        
+      <div>
+        <Button style={{paddingLeft: "15px"}}>ATTEND</Button>
+        <Button style={{paddingLeft: "15px"}}>DETAILS</Button>
       </div>
     </Card>
   );
