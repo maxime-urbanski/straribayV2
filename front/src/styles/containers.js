@@ -55,6 +55,7 @@ export const CreationContainer = styled.div`
 
 export const Card = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   margin: 0 50px 50px 50px;
@@ -64,3 +65,15 @@ export const Card = styled.div`
   -moz-box-shadow: 0px 5px 10px 0px rgba(51, 50, 50, 0.63);
   box-shadow: 0px 5px 10px 0px rgba(51, 50, 50, 0.63);
 `;
+
+export const CardTitle = styled.div`
+  display: flex;
+  justify-content: center;
+  color: red;
+  font-size: 2em;
+  width: 100%
+`
+export const CardBody = styled.div`
+  display: flex;
+  justify-content: space-between;
+`

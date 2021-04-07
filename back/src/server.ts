@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import express from 'express';
 import mongoose, { Document } from 'mongoose';
 import { ApolloServer, gql } from 'apollo-server-express';

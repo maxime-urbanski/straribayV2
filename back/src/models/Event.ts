@@ -56,7 +56,7 @@ const eventSchema = new Schema({
   theme: {
     type: String,
     required: false,
-  }
+  },
 });
 
 const Event = mongoose.model('event', eventSchema);
