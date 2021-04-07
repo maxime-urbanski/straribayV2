@@ -24,4 +24,4 @@ services:
       - /app/front/node_modules
 
 volumes:
-  data:
+  data: {}
