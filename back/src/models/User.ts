@@ -7,7 +7,6 @@ export interface UserModel extends mongoose.Document {
   firstname: string;
   lastname: string;
   email: string;
-  // event: number;
   // avatar: string;
   // group: string;
 }
