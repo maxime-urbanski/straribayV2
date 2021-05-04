@@ -3,15 +3,6 @@ import * as mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 export interface EnventModel extends mongoose.Document {
-<<<<<<< HEAD
-  title: string,
-  date: Date,
-  hour: string
-  author: string,
-  description: string
-  infos: string
-  image: string
-=======
   title: string;
   date: Date;
   hour: string;
@@ -20,7 +11,6 @@ export interface EnventModel extends mongoose.Document {
   infos: string;
   image: string;
   theme: string;
->>>>>>> 74c1c5f... fixed date
 }
 
 const eventSchema = new Schema({
