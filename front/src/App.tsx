@@ -1,8 +1,6 @@
 import Router from "./Router";
-
 import { ThemeProvider } from "styled-components";
 import {ApolloClient, ApolloProvider, InMemoryCache, gql} from "@apollo/client";
-
 import theme from "./styles/theme";
 
 const App = (): JSX.Element => {
