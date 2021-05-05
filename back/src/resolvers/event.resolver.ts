@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import Event from '../models/Event';
 import { IEvent, IInputEvent } from '../interface/event.interface';
-// https://mariusschulz.com/blog/the-unknown-type-in-typescript
+
 const eventResolver = {
   Query: {
     getEvent: async (_: unknown, { _id }: { _id: string }): Promise<IEvent> => {

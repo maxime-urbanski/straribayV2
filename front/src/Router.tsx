@@ -45,7 +45,6 @@ function Router() {
         <RouteWrapper path="/create-event" component={Home} layout={Layout} />
         <RouteWrapper path="/invit" component={ChooseInvit} layout={Layout} />
         <RouteWrapper path="/details" component={EventDetail} layout={Layout} />
-        <RouteWrapper path="/event-list" component={EventList} layout={Layout} />
         <RouteWrapper path="/login" component={Login} layout={Layout} />
       </Switch>
     </BrowserRouter>
