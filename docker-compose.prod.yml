@@ -4,7 +4,7 @@ services:
     restart: always
 
   straribay_back:
-    command: sh -c "npm run build && npm run start"
+    command: sh -c "npm run build && npm run start:prod"
     expose: 
       - 7777
     restart: always
@@ -12,23 +12,27 @@ services:
       - NODE_ENV=production
 
   straribay_front:
-		command: sh -c "npm run build"
+    command: sh -c "npm run build"
     volumes:
       - ./front/src:/app/src:rw
       - ./front/public:/app/public:rw
       - /app/front/node_modules
-		environment: 
-			- NODE_ENV=production
-			- REACT_APP_API_BASE_URL=/straribay_back
+      - straribay_front-build:/app/build
+    environment: 
+      - NODE_ENV=production
+      - REACT_APP_API_BASE_URL=/straribay_back
 
-	nginx:
-		image: nginx:2.19.10
-		restart: always
-		ports: 
-			- ${GATEWAY_PORT}:80
-		volumes: 
-			- ./nginx.conf:/etc/nginx/nginx.conf
-			- straribay_front-build:/straribay_front-build
+  nginx:
+    image: nginx:1.19.10
+    restart: always
+    ports: 
+      - ${GATEWAY_PORT}:80
+    volumes: 
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - straribay_front-build:/app/build
+    depends_on: 
+      - straribay_front
+      - straribay_back
 
 volumes:
   straribay_front-build:

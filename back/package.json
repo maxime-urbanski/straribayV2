@@ -8,6 +8,7 @@
     "test-watch": "jest --watch",
     "build": "rm -rf ./built && tsc",
     "start": "npm run dev",
+    "start:prod": "node built/src/server.js",
     "dev": "ts-node-dev --transpile-only --respawn ./src/server.ts",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix"
