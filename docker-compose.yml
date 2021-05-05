@@ -9,6 +9,8 @@ services:
     build: ./back
     ports:
       - 4000:7777
+    expose: 
+      - 7777
     volumes:
       - /data:/data
       - ./back:/app/back:rw
@@ -18,6 +20,7 @@ services:
     build: ./front
     ports:
       - 80:3000
+    env_file: ./front/.env
     volumes:
       - ./front/src:/app/src:rw
       - ./front/public:/app/public:rw
