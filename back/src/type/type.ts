@@ -1,10 +1,6 @@
 import { gql } from 'apollo-server-express';
 
 // Champs obligatoires !
-<<<<<<< HEAD
-=======
-// _id ==> id () https://github.com/WildCodeSchool/wns-auth/blob/main/src/models/user.ts
->>>>>>> 1bfd9a606f0855e9b389742ac9bd4fa81a80fa36
 
 // eslint-disable-next-line import/prefer-default-export
 export const typeDefs = gql`
