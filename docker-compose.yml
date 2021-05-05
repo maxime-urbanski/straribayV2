@@ -1,8 +1,9 @@
+version: '3.3'
 services:
   mongodb:
     image: mongo
     volumes:
-      - /data/db:/data/db:rw
+      - db:/data/db:rw
 
   straribay_back:
     image: vincefritsch/straribay_back
@@ -27,4 +28,4 @@ services:
       - /app/front/node_modules
 
 volumes:
-  data: {}
+  db:
