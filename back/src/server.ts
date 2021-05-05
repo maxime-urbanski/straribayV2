@@ -23,6 +23,7 @@ const start = async () => {
     await mongoose.connect(
       // Todo : Make a dotenv !!!
       // TIP: if you don't use docker, uncomment the next line.
+
       // ,
       // 'mongodb://127.0.0.1:27017/virtualschool',
       'mongodb://mongodb:27017/virtualschool',
