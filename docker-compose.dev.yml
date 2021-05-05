@@ -6,17 +6,17 @@ services:
     stdin_open: true
     volumes: 
       - ./src
-		ports: 
-			- ${API_PORT}:4000
+    ports: 
+      - ${API_PORT}:4000
     environment: 
       - NODE_ENV=development
 
   straribay_front:
-		command: npm run start
-		stdin_open: true
+    command: npm run start
+    stdin_open: true
     volumes:
       - ./straribay_front:/app
-		ports: ${WEB_CLIENT_PORT}:3000
-		environment: 
-			- NODE_ENV=development
-			- REACT_APP_API_BASE_URL=http://localhost:${API_PORT}
+    ports: ${WEB_CLIENT_PORT}:3000
+    environment: 
+      - NODE_ENV=development
+      - REACT_APP_API_BASE_URL=http://localhost:${API_PORT}
