@@ -16,28 +16,28 @@ export interface EnventModel extends mongoose.Document {
 const eventSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: Date,
-    required: true,
-    default: new Date()
+    required: false,
+    default: new Date(),
   },
   hour: {
     type: String,
-    required: true
+    required: true,
   },
   author: {
     type: String,
-    required: true
+    required: false,
   },
   description: {
     type: String,
-    required: false
+    required: false,
   },
   infos: {
     type: String,
-    required: false
+    required: false,
   },
   image: {
     type: String,

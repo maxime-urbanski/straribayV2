@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { CreationContainer } from "../../styles/containers";
 import { Title, Button } from "../../styles/elements";
@@ -8,8 +8,8 @@ import eventList from "../../Data";
 import { gql, useMutation} from '@apollo/client';
 
 const ADD_EVENT = gql`
-mutation AddEvent($title: String, $date: Time, $hour: String, $description: String, $infos: String, $theme: String) {
-  addEvent(title: $title, date: $date, hour: $hour, description: $description, infos: $infos, theme: $theme) {
+mutation AddEvent($input: InputEvent) {
+  addEvent(input: $input) {
     title
     date
     hour
@@ -21,6 +21,7 @@ mutation AddEvent($title: String, $date: Time, $hour: String, $description: Stri
 `
 
 const Details = (props: any): JSX.Element => {
+    let history = useHistory();
     const { attending, userSelected, event } = props.location.state;
     const { title, description, theme, date, hour, info } = event;
       event.id = eventList.length + 1;
@@ -32,16 +33,19 @@ const Details = (props: any): JSX.Element => {
       e.preventDefault(); 
       addEvent({ 
           variables: {
-          title: title,
-          date: date,
-          hour: hour,
-          description: description,
-          infos: info,
-          theme: theme
-        }
+            input: {
+              title: title,
+              date: date,
+              hour: hour,
+              description: description,
+              infos: info,
+              theme: theme
+            }
+          }
       })
       .then((response)=> console.log(response.data))
       .catch((err)=> console.log(err))
+      .finally(() => history.push("/event-list"))
      console.log(addEvent())
     } 
  
@@ -64,17 +68,8 @@ const Details = (props: any): JSX.Element => {
           You&apos;ve invited <span></span>
           {userSelected}
         </h3>
-         <Link
-          to={{
-            pathname: "./events",
-            state: {
-              eventlist: eventList,
-            },
-          }}
-        > 
-          <Button onClick={handleSubmit}>Add this event ?</Button>
-        </Link> 
-      </CreationContainer>
+          <Button onClick={handleSubmit}>Add this event ? </Button>
+        </CreationContainer> 
     </>
   );
 }; 
