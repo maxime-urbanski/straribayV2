@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { CreationContainer } from "../../styles/containers";
 import { Title, Button } from "../../styles/elements";
@@ -21,6 +21,7 @@ mutation AddEvent($input: InputEvent) {
 `
 
 const Details = (props: any): JSX.Element => {
+    let history = useHistory();
     const { attending, userSelected, event } = props.location.state;
     const { title, description, theme, date, hour, info } = event;
       event.id = eventList.length + 1;
@@ -44,6 +45,7 @@ const Details = (props: any): JSX.Element => {
       })
       .then((response)=> console.log(response.data))
       .catch((err)=> console.log(err))
+      .finally(() => history.push("/event-list"))
      console.log(addEvent())
     } 
  
@@ -66,17 +68,8 @@ const Details = (props: any): JSX.Element => {
           You&apos;ve invited <span></span>
           {userSelected}
         </h3>
-         <Link
-          to={{
-            pathname: "./events",
-            state: {
-              eventlist: eventList,
-            },
-          }}
-        > 
-          <Button onClick={handleSubmit}>Add this event ?</Button>
-        </Link> 
-      </CreationContainer>
+          <Button onClick={handleSubmit}>Add this event ? </Button>
+        </CreationContainer> 
     </>
   );
 }; 
