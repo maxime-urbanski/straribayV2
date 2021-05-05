@@ -8,8 +8,8 @@ import eventList from "../../Data";
 import { gql, useMutation} from '@apollo/client';
 
 const ADD_EVENT = gql`
-mutation AddEvent($title: String, $date: Time, $hour: String, $description: String, $infos: String, $theme: String) {
-  addEvent(title: $title, date: $date, hour: $hour, description: $description, infos: $infos, theme: $theme) {
+mutation AddEvent($input: InputEvent) {
+  addEvent(input: $input) {
     title
     date
     hour
@@ -32,13 +32,15 @@ const Details = (props: any): JSX.Element => {
       e.preventDefault(); 
       addEvent({ 
           variables: {
-          title: title,
-          date: date,
-          hour: hour,
-          description: description,
-          infos: info,
-          theme: theme
-        }
+            input: {
+              title: title,
+              date: date,
+              hour: hour,
+              description: description,
+              infos: info,
+              theme: theme
+            }
+          }
       })
       .then((response)=> console.log(response.data))
       .catch((err)=> console.log(err))

@@ -5,13 +5,10 @@ import { IUser, InputUser } from '../interface/user.interface';
 
 const userResolver = {
   Query: {
-    getUser: async (
-      _: unknown,
-      { email }: { email: string }
-    ): Promise<IUser> => {
+    getUser: async (_: unknown, { _id }: { _id: string }): Promise<IUser> => {
       // eslint-disable-next-line no-console
-      console.log('email', email);
-      const user = await User.findOne({ email });
+      console.log('email', _id);
+      const user = await User.findOne({ _id });
       return <IUser>user;
     },
     getUsers: async () => User.find({}),
@@ -19,14 +16,10 @@ const userResolver = {
 
   Mutation: {
     addUser: async (_: unknown, args: { input: InputUser }) => {
-      try {
-        const response = await User.create(args.input);
-        // eslint-disable-next-line no-console
-        console.log(response, args, args);
-        return response;
-      } catch (e) {
-        return e.message;
-      }
+      const user = await User.create(args.input);
+      // eslint-disable-next-line no-console
+      console.log(user, args, args);
+      return user;
     },
   },
 };
