@@ -16,7 +16,8 @@ services:
     stdin_open: true
     volumes:
       - ./straribay_front:/app
-    ports: ${WEB_CLIENT_PORT}:3000
+    ports: 
+      - ${WEB_CLIENT_PORT}:3000
     environment: 
       - NODE_ENV=development
       - REACT_APP_API_BASE_URL=http://localhost:${API_PORT}
