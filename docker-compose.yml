@@ -6,26 +6,7 @@ services:
       - db:/data/db:rw
 
   straribay_back:
-    image: vincefritsch/straribay_back
     build: ./back
-    ports:
-      - 4000:7777
-    expose: 
-      - 7777
-    volumes:
-      - /data:/data
-      - ./back:/app/back:rw
 
   straribay_front:
-    image: vincefritsch/straribay_front
     build: ./front
-    ports:
-      - 80:3000
-    env_file: ./front/.env
-    volumes:
-      - ./front/src:/app/src:rw
-      - ./front/public:/app/public:rw
-      - /app/front/node_modules
-
-volumes:
-  db:
