@@ -1,6 +1,7 @@
 import Router from "./Router";
 
 import { ThemeProvider } from "styled-components";
+import {ApolloClient, ApolloProvider, InMemoryCache, gql} from "@apollo/client";
 
 import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
 

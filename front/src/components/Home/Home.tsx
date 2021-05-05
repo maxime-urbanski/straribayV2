@@ -30,7 +30,7 @@ const Home = (): JSX.Element => {
         <textarea value={valueInputArea} onChange={handleArea} />
         <Link
           to={{
-            pathname: "/ChooseInfo",
+            pathname: "/choose-info",
             state: {
               title: valueInputTitle,
               description: valueInputArea,

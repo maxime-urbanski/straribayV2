@@ -8,9 +8,15 @@ export const Button = styled.button`
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  margin-top: 15px;
 
   color: ${(props) => props.theme.white};
   background-color: ${(props) => props.theme.orange};
+`;
+
+export const Input = styled.input`
+  border-radius: 5px;
+  margin-top: -17px;
 `;
 
 export const Title = styled.h3`
