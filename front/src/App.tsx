@@ -5,7 +5,7 @@ import theme from "./styles/theme";
 
 const App = (): JSX.Element => {
   const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  uri: 'https://prod.straribay.wns.wilders.dev/api/graphql',
   cache: new InMemoryCache(),
 })
   return (
