@@ -10,7 +10,11 @@ const eventResolver = {
       const event = await Event.findOne({ _id });
       return <IEvent>event;
     },
-    getEvents: async () => Event.find({}),
+    getEvents: async () => {
+      const events = await Event.find({})
+      console.log("event find :", events)
+      return events
+    },
   },
 
   Mutation: {

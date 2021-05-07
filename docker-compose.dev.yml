@@ -4,18 +4,20 @@ services:
   straribay_back:
     command: npm run start
     stdin_open: true
+    restart: always
     volumes: 
-      - ./src
+      - ./back/src:/app/src
     ports: 
-      - ${API_PORT}:4000
+      - ${API_PORT}:7777
     environment: 
       - NODE_ENV=development
 
   straribay_front:
     command: npm run start
     stdin_open: true
+    restart: always
     volumes:
-      - ./straribay_front:/app
+      - ./front/src:/app/src
     ports: 
       - ${WEB_CLIENT_PORT}:3000
     environment: 
