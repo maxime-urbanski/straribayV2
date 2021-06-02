@@ -1,32 +1,32 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { CreationContainer } from "../../styles/containers";
 import { Title, Button } from "../../styles/elements";
 import eventList from "../../Data";
 
-import { gql, useMutation} from '@apollo/client';
+import { gql, useMutation } from "@apollo/client";
 
 const ADD_EVENT = gql`
-mutation AddEvent($input: InputEvent) {
-  addEvent(input: $input) {
-    title
-    date
-    hour
-    description
-    infos
-    theme
+  mutation AddEvent($input: InputEvent) {
+    addEvent(input: $input) {
+      title
+      date
+      hour
+      description
+      infos
+      theme
+    }
   }
-} 
-`
+`;
 
 const Details = (props: any): JSX.Element => {
-    let history = useHistory();
-    const { attending, userSelected, event } = props.location.state;
-    const { title, description, theme, date, hour, info } = event;
-      event.id = eventList.length + 1;
-    // eslint-disable-next-line react/destructuring-assignment
-    const [addEvent] = useMutation(ADD_EVENT);
+  let history = useHistory();
+  const { attending, userSelected, event } = props.location.state;
+  const { title, description, theme, date, hour, info } = event;
+  event.id = eventList.length + 1;
+  // eslint-disable-next-line react/destructuring-assignment
+  const [addEvent] = useMutation(ADD_EVENT);
 
    
     const handleSubmit = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
@@ -67,9 +67,9 @@ const Details = (props: any): JSX.Element => {
           You&apos;ve invited <span></span>
           {userSelected}
         </h3>
-          <Button onClick={handleSubmit}>Add this event ? </Button>
-        </CreationContainer> 
+        <Button onClick={handleSubmit}>Add this event ? </Button>
+      </CreationContainer>
     </>
   );
-}; 
+};
 export default Details;

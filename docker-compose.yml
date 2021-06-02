@@ -1,4 +1,4 @@
-version: '3.3'
+version: "3.3"
 services:
   mongodb:
     image: mongo
@@ -7,6 +7,14 @@ services:
 
   straribay_back:
     build: ./back
+    ports:
+      - 4000:7777
+    expose:
+      - 7777
+    volumes:
+      - /data:/data
+      - ./back:/app/back:rw
+      - /app/back/node_modules
 
   straribay_front:
     build: ./front

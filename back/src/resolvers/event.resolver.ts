@@ -22,10 +22,7 @@ const eventResolver = {
       _: unknown,
       args: { input: IInputEvent }
     ): Promise<IEvent> => {
-      console.log('pas helooooooo', args.input);
       const event = await Event.create(args.input);
-      // eslint-disable-next-line no-console
-      console.log('helooooooooo', event, args);
       return <IEvent>event;
     },
   },
