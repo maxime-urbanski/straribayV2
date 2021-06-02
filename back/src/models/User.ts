@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import { Password } from 'src/service/Password';
+import { Password } from '../service/Password';
 const { Schema } = mongoose;
 const saltRounds = 12;
 // export const { Mixed } = mongoose.Schema.Types;

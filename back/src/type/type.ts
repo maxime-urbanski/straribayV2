@@ -21,6 +21,7 @@ export const typeDefs = gql`
     firstname: String!
     lastname: String!
     email: String!
+    password: String!
   }
 
   type User {
@@ -28,6 +29,7 @@ export const typeDefs = gql`
     firstname: String!
     lastname: String!
     email: String!
+    password: String!
   }
 
   type Event {
@@ -49,7 +51,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(firstname: String!, lastname: String!, email: String!): User
+    addUser(input: InputUser): User
     addEvent(input: InputEvent): Event
   }
 `;
