@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+export const Button = styled.button<{notValid?: boolean}>`
   width: 150px;
   height: 50px;
 
@@ -11,7 +11,9 @@ export const Button = styled.button`
   margin-top: 15px;
 
   color: ${(props) => props.theme.white};
-  background-color: ${(props) => props.theme.orange};
+  background-color: ${(props) => props.notValid ? 'grey' : props.theme.orange};
+
+  pointer-events: ${(props) => props.notValid && 'none'};
 `;
 
 export const Input = styled.input`
@@ -20,8 +22,8 @@ export const Input = styled.input`
 `;
 
 export const Title = styled.h3`
-  color: ${(props) => props.theme.blue};
-  font-weight: ${(props) => props.theme.bold};
+  color: ${({theme}) => theme.blue};
+  font-weight: ${({theme}) => theme.bold};
 
   margin: 50px 0 50px 50px;
 `;

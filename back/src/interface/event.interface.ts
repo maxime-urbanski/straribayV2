@@ -13,7 +13,7 @@ export interface IInputEvent extends Document {
 
 export interface IEvent extends Document {
   title: string;
-  date: Date;
+  date: string;
   hour: string;
   description: string;
   infos: string;

@@ -45,9 +45,8 @@ const Signup = () => {
       }
     }
   `
-//  const checkIfSamePassword = () => {
-//    valueInputPassword === valueInputConfirmPassword ? 
-//  }
+    const goodPassword = valueInputPassword.length > 0 && (valueInputPassword === valueInputConfirmPassword);    
+
     const [addUser] = useMutation(ADD_USER);
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -62,10 +61,8 @@ const Signup = () => {
           },
         },
       })
-      .then((response) => console.log(response.data))
       .catch((err) => console.log(err))
       .finally(() => history.push('/event-list'));
-      console.log(addUser);
     };
 
   return (
@@ -81,8 +78,9 @@ const Signup = () => {
         <h4>Your password</h4>
         <Input value={valueInputPassword} type="password" onChange={handleInputPassword} required/>
         <h4>Confirm your password</h4>
-        <Input value={valueInputConfirmPassword} type="password" onChange={handleInputConfirmPassword} required/>        
-        <Button onClick={handleSubmit}>Connect</Button>
+        <Input value={valueInputConfirmPassword} type="password" onChange={handleInputConfirmPassword} required/>
+        {(!goodPassword && valueInputConfirmPassword.length > 0 )? <p>Passwords are not the same</p> : null}
+        {goodPassword ? <Button onClick={handleSubmit}>Connect</Button> : <Button notValid>Connect</Button>}
       </CreationContainer>
     </>  
     );

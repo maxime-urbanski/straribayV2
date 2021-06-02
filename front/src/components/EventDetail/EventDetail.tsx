@@ -28,26 +28,24 @@ const Details = (props: any): JSX.Element => {
   // eslint-disable-next-line react/destructuring-assignment
   const [addEvent] = useMutation(ADD_EVENT);
 
-   
-    const handleSubmit = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
-      e.preventDefault(); 
-      addEvent({ 
-          variables: {
-            input: {
-              title: title,
-              date: date,
-              hour: hour,
-              description: description,
-              infos: info,
-              theme: theme
-            }
+  const handleSubmit = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
+    e.preventDefault(); 
+    addEvent({ 
+        variables: {
+          input: {
+            title: title,
+            date: date,
+            hour: hour,
+            description: description,
+            infos: info,
+            theme: theme
           }
-      })
-      .then((response)=> console.log(response.data))
-      .catch((err)=> console.log(err))
-      .finally(() => history.push("/event-list"))
-    } 
- 
+        }
+    })
+    .then((response)=> console.log(response.data))
+    .catch((err)=> console.log(err))
+    .finally(() => history.push("/event-list"))
+  }
 
   return (
     <>

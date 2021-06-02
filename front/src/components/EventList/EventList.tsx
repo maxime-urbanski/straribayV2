@@ -3,7 +3,7 @@ import 'dayjs/locale/fr';
 import dayjs from 'dayjs';
 import EventCard, { IEvent } from "../EventCard/EventCard";
 import { Title } from "../../styles/elements";
-import { gql, useQuery } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client';
 
 const GET_EVENTS = gql `
 query GetEvents {
@@ -26,7 +26,6 @@ function EventList() {
 
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
-  console.log("Data", data.getEvents);
   
   // for (let i=0; i<data.getEvents.length; i++) {
   //   const totalDate = data.getEvents[i].date;
@@ -44,7 +43,7 @@ function EventList() {
           key={_id}
           title={title}
           theme={theme}
-          date={dayjs(date).format('DD/MM/YYYY')}
+          date={new Date(date*1).toLocaleDateString()}
           hour={hour}          
           description={description}
           infos={infos}          
