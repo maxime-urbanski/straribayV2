@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
-import { Password } from '../service/Password';
+import Password from '../service/Password';
+
 const { Schema } = mongoose;
-const saltRounds = 12;
 // export const { Mixed } = mongoose.Schema.Types;
 
 export interface UserModel extends mongoose.Document {
@@ -9,6 +9,8 @@ export interface UserModel extends mongoose.Document {
   lastname: string;
   email: string;
   password: string;
+  role: string;
+  token?: string;
   // avatar: string;
   // group: string;
 }
@@ -32,15 +34,19 @@ const userSchema = new Schema({
     required: true,
     min: 8,
   },
+  role: {
+    type: String,
+    default: 'USER',
+  },
   group: String,
 });
 
-userSchema.pre('save', async function(done) {
+userSchema.pre('save', async (done) => {
   if (this.isModified('password')) {
     const hashed = await Password.toHash(this.get('password'));
     this.set('password', hashed);
   }
-  done();  
+  done();
 });
 
 const User = mongoose.model<UserModel>('user', userSchema);

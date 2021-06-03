@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
-import { CreationContainer } from '../../styles/containers';
+import { CreationContainer } from "../../styles/containers";
 import { Button, Title, Input } from "../../styles/elements";
 
 const Signup = () => {
@@ -10,8 +9,9 @@ const Signup = () => {
   const [valueInputLastname, setValueInputLastname] = useState("");
   const [valueInputEmail, setValueInputMail] = useState("");
   const [valueInputPassword, setValueInputPassword] = useState("");
-  const [valueInputConfirmPassword, setValueInputConfirmPassword] = useState("");
-  
+  const [valueInputConfirmPassword, setValueInputConfirmPassword] =
+    useState("");
+
   let history = useHistory();
   const handleInputFirstname = (event: any) => {
     setValueInputFirstname(event.target.value);
@@ -33,7 +33,7 @@ const Signup = () => {
     setValueInputConfirmPassword(event.target.value);
   };
 
- // TODO: remove PASSWORD !!!!!!!!
+  // TODO: remove PASSWORD !!!!!!!!
 
   const ADD_USER = gql`
     mutation AddUser($input: InputUser) {
@@ -44,46 +44,79 @@ const Signup = () => {
         email
       }
     }
-  `
-    const goodPassword = valueInputPassword.length > 0 && (valueInputPassword === valueInputConfirmPassword);    
+  `;
+  const goodPassword =
+    valueInputPassword.length > 0 &&
+    valueInputPassword === valueInputConfirmPassword;
 
-    const [addUser] = useMutation(ADD_USER);
+  const [addUser] = useMutation(ADD_USER);
 
-    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      e.preventDefault();
-      addUser({
-        variables: {
-          input: {
-            firstname: valueInputFirstname,
-            lastname: valueInputLastname,
-            email: valueInputEmail,
-            password: valueInputPassword
-          },
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    addUser({
+      variables: {
+        input: {
+          firstname: valueInputFirstname,
+          lastname: valueInputLastname,
+          email: valueInputEmail,
+          password: valueInputPassword,
         },
-      })
+      },
+    })
       .catch((err) => console.log(err))
-      .finally(() => history.push('/event-list'));
-    };
+      .finally(() => history.push("/event-list"));
+  };
 
   return (
     <>
       <Title>Créer un compte</Title>
       <CreationContainer>
         <h4>Your firstname</h4>
-        <Input value={valueInputFirstname} type="text" onChange={handleInputFirstname} required/>
+        <Input
+          value={valueInputFirstname}
+          type="text"
+          onChange={handleInputFirstname}
+          required
+        />
         <h4>Your lastname</h4>
-        <Input value={valueInputLastname} type="text" onChange={handleInputLastname} required/>
+        <Input
+          value={valueInputLastname}
+          type="text"
+          onChange={handleInputLastname}
+          required
+        />
         <h4>Your email</h4>
-        <Input value={valueInputEmail} type="text" onChange={handleInputMail} required/>
+        <Input
+          value={valueInputEmail}
+          type="text"
+          onChange={handleInputMail}
+          required
+        />
         <h4>Your password</h4>
-        <Input value={valueInputPassword} type="password" onChange={handleInputPassword} required/>
+        <Input
+          value={valueInputPassword}
+          type="password"
+          onChange={handleInputPassword}
+          required
+        />
         <h4>Confirm your password</h4>
-        <Input value={valueInputConfirmPassword} type="password" onChange={handleInputConfirmPassword} required/>
-        {(!goodPassword && valueInputConfirmPassword.length > 0 )? <p>Passwords are not the same</p> : null}
-        {goodPassword ? <Button onClick={handleSubmit}>Connect</Button> : <Button notValid>Connect</Button>}
+        <Input
+          value={valueInputConfirmPassword}
+          type="password"
+          onChange={handleInputConfirmPassword}
+          required
+        />
+        {!goodPassword && valueInputConfirmPassword.length > 0 ? (
+          <p>Passwords are not the same</p>
+        ) : null}
+        {goodPassword ? (
+          <Button onClick={handleSubmit}>Connect</Button>
+        ) : (
+          <Button notValid>Connect</Button>
+        )}
       </CreationContainer>
-    </>  
-    );
+    </>
+  );
 };
 
 export default Signup;

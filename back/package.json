@@ -16,12 +16,15 @@
   "author": "Rbn77, LusiDave, Nishibi, Vince, Maxiloud",
   "license": "ISC",
   "dependencies": {
+    "@types/jsonwebtoken": "^8.5.1",
     "apollo-server-express": "^2.19.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "graphql": "^15.4.0",
     "graphql-express-server-decorators": "^0.0.6",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.8",
     "reflect-metadata": "^0.1.13"
   },

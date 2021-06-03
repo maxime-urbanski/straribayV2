@@ -30,6 +30,7 @@ export const typeDefs = gql`
     lastname: String!
     email: String!
     password: String!
+    token: String
   }
 
   type Event {
@@ -43,8 +44,24 @@ export const typeDefs = gql`
     infos: String
     image: String
   }
+
+  type AuthUser {
+    firstname: String
+    lastname: String
+    token: String
+    password: String
+    email: String
+    _id: ID
+    type: LOGIN_TYPE
+  }
+
+  enum LOGIN_TYPE {
+    ADMIN
+    USER
+  }
+
   type Query {
-    getUser(email: String): User
+    getUser(_id: String): User
     getUsers: [User]
     getEvent(_id: String): Event
     getEvents: [Event]
@@ -53,5 +70,6 @@ export const typeDefs = gql`
   type Mutation {
     addUser(input: InputUser): User
     addEvent(input: InputEvent): Event
+    auth(email: String!, password: String!): AuthUser
   }
 `;
