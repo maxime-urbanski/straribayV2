@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-console */
 import Event from '../models/Event';
-import { IEvent, IInputEvent } from '../interface/event.interface';
+import { IEvent, IInputEvent, IId } from '../interface/event.interface';
 
 const eventResolver = {
   Query: {
@@ -22,13 +22,17 @@ const eventResolver = {
       _: unknown,
       args: { input: IInputEvent }
     ): Promise<IEvent> => {
-      console.log('pas helooooooo', args.input);
       const event = await Event.create(args.input);
-      // eslint-disable-next-line no-console
-      console.log('helooooooooo', event, args);
       return <IEvent>event;
     },
+    deleteAllEvents: async (
+      _: unknown,
+      args: { input: IId }
+    ) => {
+      const event = await Event.deleteOne({ _id: args.input });
+    },
   },
-};
+}
+  
 
 export default eventResolver;

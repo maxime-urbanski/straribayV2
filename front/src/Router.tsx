@@ -12,7 +12,7 @@ import Signup from "./components/Signup/Signup";
 
 type RouterWrapper = {
   component: any;
-  layout: any;
+  layout?: any;
   exact?: any;
   path: any;
 };
@@ -40,8 +40,16 @@ function Router() {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route path="/create-account" component={Signup} />
-        <RouteWrapper path="/event-list" component={EventList} layout={Layout} />
-        <RouteWrapper path="/choose-info" component={ChooseInfo} layout={Layout} />
+        <RouteWrapper
+          path="/event-list"
+          component={EventList}
+          layout={Layout}
+        />
+        <RouteWrapper
+          path="/choose-info"
+          component={ChooseInfo}
+          layout={Layout}
+        />
         <RouteWrapper path="/create-event" component={Home} layout={Layout} />
         <RouteWrapper path="/invit" component={ChooseInvit} layout={Layout} />
         <RouteWrapper path="/details" component={EventDetail} layout={Layout} />

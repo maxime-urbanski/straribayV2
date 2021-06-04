@@ -1,47 +1,48 @@
 import React from "react";
 
-import { Card, CardBody,CardTitle } from "../../styles/containers";
-import { Button } from "../../styles/elements";
+import { Card, CardBody, CardPicture, CardText, CardButtons } from "../../styles/containers";
+import { Button, CardTitle, Text } from "../../styles/elements";
 
-export interface IEvent {
-  _id?: string
+export interface IEventCard {
   title: string;
   theme: string;
-  date: Date| string | any;
+  date: Date | string | any;
   hour: string;
-  
   description: string;
-  infos: string | undefined;
-  
+  infos?: string;
+  image?: string;
 }
 
-const EventCard: React.FC<IEvent> = ({
+const EventCard: React.FC<IEventCard> = ({
   title,
   theme,
   date,
   hour,
   description,
   infos,
-  
+  image,
 }) => {
   return (
     <Card>
-      <CardTitle>
-        {title}
-      </CardTitle>
+      <CardPicture alt='event picture' src={image}/>
       <CardBody>
-        <span style={{paddingLeft: "15px"}}>{theme}</span>
-        <span style={{paddingLeft: "15px"}}>
-          {date} {hour}
-        </span>        
-        <span style={{paddingLeft: "15px"}}>{description}</span>
-        <span style={{paddingLeft: "15px"}}>{infos}</span>        
-      </CardBody>        
-        
-      <div>
-        <Button style={{paddingLeft: "15px"}}>ATTEND</Button>
-        <Button style={{paddingLeft: "15px"}}>DETAILS</Button>
-      </div>
+        <div><CardTitle>{title}</CardTitle></div>
+        <div style={{display: 'flex', width: '100%', justifyContent: 'space-between'}}>
+          <CardText>
+            <Text>{theme}</Text>
+            <Text>{date}</Text>
+            <Text>{hour}</Text>
+          </CardText>
+          <CardText>
+            <Text>{description}</Text>
+            <Text>{infos}</Text>
+          </CardText>
+        <CardButtons>
+          <Button>ATTEND</Button>
+          <Button>DETAILS</Button>
+        </CardButtons>
+        </div>
+      </CardBody>
     </Card>
   );
 };

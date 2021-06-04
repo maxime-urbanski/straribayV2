@@ -54,26 +54,37 @@ export const CreationContainer = styled.div`
 `;
 
 export const Card = styled.div`
+  height: 300px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   margin: 0 50px 50px 50px;
-  padding: 10px;
   border-radius: 10px;
   -webkit-box-shadow: 0px 5px 10px 0px rgba(51, 50, 50, 0.63);
   -moz-box-shadow: 0px 5px 10px 0px rgba(51, 50, 50, 0.63);
   box-shadow: 0px 5px 10px 0px rgba(51, 50, 50, 0.63);
 `;
 
-export const CardTitle = styled.div`
-  display: flex;
-  justify-content: center;
-  color: red;
-  font-size: 2em;
-  width: 100%
+export const CardPicture = styled.img`
+  border-radius: 10px 0 0 10px;
+  max-height: 300px;
 `
+
 export const CardBody = styled.div`
   display: flex;
-  justify-content: space-between;
+  max-height: 100%;
+  width: 100%;
+  flex-direction: column;
+  padding: 20px;
+`
+
+export const CardText = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`
+
+export const CardButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
 `

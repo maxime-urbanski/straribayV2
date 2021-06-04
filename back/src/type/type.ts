@@ -6,6 +6,10 @@ import { gql } from 'apollo-server-express';
 export const typeDefs = gql`
   scalar Time
 
+  input InputId {
+    _id: String!
+  }
+
   input InputEvent {
     title: String!
     theme: String!
@@ -21,6 +25,7 @@ export const typeDefs = gql`
     firstname: String!
     lastname: String!
     email: String!
+    password: String!
   }
 
   type User {
@@ -28,6 +33,8 @@ export const typeDefs = gql`
     firstname: String!
     lastname: String!
     email: String!
+    password: String!
+    token: String
   }
 
   type Event {
@@ -41,15 +48,32 @@ export const typeDefs = gql`
     infos: String
     image: String
   }
+
+  type AuthUser {
+    firstname: String
+    lastname: String
+    token: String
+    password: String
+    email: String
+    _id: ID
+    type: LOGIN_TYPE
+  }
+
+  enum LOGIN_TYPE {
+    ADMIN
+    USER
+  }
+
   type Query {
-    getUser(email: String): User
+    getUser(_id: String): User
     getUsers: [User]
     getEvent(_id: String): Event
     getEvents: [Event]
   }
 
   type Mutation {
-    addUser(firstname: String!, lastname: String!, email: String!): User
+    addUser(input: InputUser): User
     addEvent(input: InputEvent): Event
-  }
-`;
+    auth(email: String!, password: String!): AuthUser
+    deleteAllEvents(input: InputId): Event
+  }`;
