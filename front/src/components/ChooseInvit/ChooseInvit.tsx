@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import Result from "../Result/Result";
+// import Result from "../Result/Result";
 
 import { CreationContainer } from "../../styles/containers";
 import { Button, Title } from "../../styles/elements";
 
-const userSuggestions = ["Cloé", "Baptiste", "Maxime", "Marie"];
+// const userSuggestions = ["Cloé", "Baptiste", "Maxime", "Marie"];
 
 const ChooseInvit = (props: any) => {
   // eslint-disable-next-line react/destructuring-assignment
@@ -15,23 +15,28 @@ const ChooseInvit = (props: any) => {
   event.hour = hour;
   event.info = info;
 
-  const [value, setValue] = useState("");
-  const [attending, setAttending] = useState("Friends");
+  // const [value, setValue] = useState("");
+  // const [attending, setAttending] = useState("Friends");
+  const [pictureValue, setPictureValue] = useState("");
 
-  const handleChange = (event: any) => {
-    setValue(event.target.value);
-  };
-  const valueInsensibleCase = new RegExp(value, "i");
+  // const handleChange = (event: any) => {
+  //   setValue(event.target.value);
+  // };
+  // const valueInsensibleCase = new RegExp(value, "i");
 
-  const handleAttend = (event: any) => {
-    setAttending(event.target.value);
+  // const handleAttend = (event: any) => {
+  //   setAttending(event.target.value);
+  // };
+
+  const handleChangePicture = (event: any) => {
+    setPictureValue(event.target.value);
   };
 
   return (
     <>
       <Title>Create your Event</Title>
       <CreationContainer>
-        <div>
+        {/* <div>
           <label htmlFor="audience">Who can attend :</label>
           <select onChange={handleAttend} name="choose-audience" id="audience">
             <option value="Friends">Friends</option>
@@ -43,7 +48,7 @@ const ChooseInvit = (props: any) => {
           <label htmlFor="invitations">Invite someone :</label>
           <input
             onChange={handleChange}
-            name="choose=invitation"
+            name="choose-invitation"
             id="invitations"
             type="email"
             value={value}
@@ -54,14 +59,25 @@ const ChooseInvit = (props: any) => {
           valueInsensibleCase={valueInsensibleCase}
           userSuggestions={userSuggestions}
           value={value}
-        />
+        /> */}
+        <div>
+          <label htmlFor="picture">Choose a picture</label>
+          <input
+            onChange={handleChangePicture}
+            name="choose=picture"
+            id="picture"
+            type="string"
+            value={pictureValue}
+          />
+        </div>
         <Link
           to={{
             pathname: "/Details",
             state: {
-              attending,
-              userSelected: value,
+              // attending,
+              // userSelected: value,
               event,
+              picture: pictureValue
             },
           }}
         >

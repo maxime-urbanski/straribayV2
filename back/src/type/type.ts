@@ -6,6 +6,10 @@ import { gql } from 'apollo-server-express';
 export const typeDefs = gql`
   scalar Time
 
+  input InputId {
+    _id: String!
+  }
+
   input InputEvent {
     title: String!
     theme: String!
@@ -71,5 +75,5 @@ export const typeDefs = gql`
     addUser(input: InputUser): User
     addEvent(input: InputEvent): Event
     auth(email: String!, password: String!): AuthUser
-  }
-`;
+    deleteAllEvents(input: InputId): Event
+  }`;

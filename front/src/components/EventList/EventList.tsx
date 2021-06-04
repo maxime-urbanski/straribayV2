@@ -11,6 +11,7 @@ interface Props {
   hour: string;
   description: string;
   infos: string;
+  image?: string;
 }
 
 const GET_EVENTS = gql`
@@ -23,6 +24,7 @@ const GET_EVENTS = gql`
       description
       infos
       theme
+      image
     }
   }
 `;
@@ -45,7 +47,7 @@ function EventList() {
     <>
       <Title>List of available events</Title>
       {data.getEvents.map(
-        ({ _id, title, theme, date, hour, description, infos }: Props) => (
+        ({ _id, title, theme, date, hour, description, infos, image }: Props) => (
           <EventCard
             key={_id}
             title={title}
@@ -54,6 +56,7 @@ function EventList() {
             hour={hour}
             description={description}
             infos={infos}
+            image={image}
           />
         )
       )}

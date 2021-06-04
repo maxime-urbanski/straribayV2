@@ -34,13 +34,11 @@ const Login = () => {
       variables: {
         email: valueInputEmail,
         password: valueInputPassword,
-      },
-      onCompleted: ({ auth }) => {
-        localStorage.setItem("token", auth.token);
-        history.push("/event-list");
-      },
-    }).catch((err: Error) => console.log(err));
-  };
+      }
+    })
+      .then((response) => console.log(response.data.auth.token))
+      .catch((err) => console.log(err));
+    };
 
   if (loading) return <p>Loading ...</p>;
   if (error) return <p>Error! {error.message}</p>;

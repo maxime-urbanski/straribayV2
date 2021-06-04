@@ -19,3 +19,7 @@ export interface IEvent extends Document {
   infos: string;
   theme: string;
 }
+
+export interface IId extends Document {
+  _id: string;
+}

@@ -24,6 +24,15 @@ export const Input = styled.input`
 export const Title = styled.h3`
   color: ${({theme}) => theme.blue};
   font-weight: ${({theme}) => theme.bold};
-
-  margin: 50px 0 50px 50px;
 `;
+
+export const Text = styled.p`
+  color: ${({theme}) => theme.blue};
+`
+
+export const CardTitle = styled.h4`
+  font-size: 30px;
+  text-transform: uppercase;
+  color: ${({theme}) => theme.blue};
+  margin: 0 0 40px 0;
+`
