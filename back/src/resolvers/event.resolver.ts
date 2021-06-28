@@ -11,9 +11,9 @@ const eventResolver = {
       return <IEvent>event;
     },
     getEvents: async () => {
-      const events = await Event.find({})
-      console.log("event find :", events)
-      return events
+      const events = await Event.find({});
+      console.log('event find :', events);
+      return events;
     },
   },
 
@@ -25,14 +25,10 @@ const eventResolver = {
       const event = await Event.create(args.input);
       return <IEvent>event;
     },
-    deleteAllEvents: async (
-      _: unknown,
-      args: { input: IId }
-    ) => {
+    deleteAllEvents: async (_: unknown, args: { input: IId }) => {
       const event = await Event.deleteOne({ _id: args.input });
     },
   },
-}
-  
+};
 
 export default eventResolver;

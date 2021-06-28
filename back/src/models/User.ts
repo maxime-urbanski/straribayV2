@@ -9,10 +9,7 @@ export interface UserModel extends mongoose.Document {
   lastname: string;
   email: string;
   password: string;
-  role: string;
-  token?: string;
-  // avatar: string;
-  // group: string;
+  // role: string;
 }
 
 const userSchema = new Schema({
@@ -34,11 +31,11 @@ const userSchema = new Schema({
     required: true,
     min: 8,
   },
-  role: {
-    type: String,
-    default: 'USER',
-  },
-  group: String,
+  // role: {
+  //   type: String,
+  //   default: 'USER',
+  // },
+  // group: String,
 });
 
 userSchema.pre('save', async (done) => {

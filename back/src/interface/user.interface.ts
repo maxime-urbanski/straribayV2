@@ -8,8 +8,12 @@ export interface InputUser extends Document {
 }
 
 export interface IUser extends Document {
-  firstname?: string;
-  lastname?: string;
-  email?: string;
-  token?: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+}
+
+export interface IAuth {
+  token: string;
+  user: IUser;
 }
