@@ -35,11 +35,26 @@ function RouteWrapper({
 }
 
 function Router() {
+  let token = localStorage.getItem('token');
+  if (token) {
+    let parts = token
+      .split('.')
+      .map((part) =>
+        Buffer.from(
+          part.replace(/-/g, '+').replace(/_/g, '/'),
+          'base64'
+        ).toString()
+      );
+      const payload = JSON.parse(parts[1]);
+      const { exp } = payload;
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      exp *1000 < new Date().getTime() ? (token = '') : token;
+  }
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={Login} />
-        <Route path="/create-account" component={Signup} />
+      {token ? 
+      <>
         <RouteWrapper
           path="/event-list"
           component={EventList}
@@ -54,6 +69,13 @@ function Router() {
         <RouteWrapper path="/invit" component={ChooseInvit} layout={Layout} />
         <RouteWrapper path="/details" component={EventDetail} layout={Layout} />
         <RouteWrapper path="/login" component={Login} layout={Layout} />
+      </>
+      :
+      <>
+        <Route exact path="/" component={Login} />
+        <Route path="/create-account" component={Signup} />
+      </>
+    }
       </Switch>
     </BrowserRouter>
   );

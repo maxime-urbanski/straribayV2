@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-console */
 import jwt from 'jsonwebtoken';
+
 import User from '../models/User';
 import { IUser, InputUser, IAuth } from '../interface/user.interface';
 import Password from '../service/Password';
@@ -10,7 +11,7 @@ const secret = 'hellolamif';
 
 const userResolver = {
   Query: {
-    getUser: async (_: unknown, { _id }: { _id: string }): Promise<IUser> => {
+    getUser: async (_: unknown, _id: string): Promise<IUser> => {
       const user = await User.findOne({ _id });
       return <IUser>user;
     },
@@ -51,4 +52,5 @@ const userResolver = {
     },
   },
 };
+
 export default userResolver;

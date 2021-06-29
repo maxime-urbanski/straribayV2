@@ -29,7 +29,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    min: 8,
+    minlenght: 8,
   },
   // role: {
   //   type: String,
@@ -38,12 +38,13 @@ const userSchema = new Schema({
   // group: String,
 });
 
-userSchema.pre('save', async (done) => {
+// eslint-disable-next-line func-names
+userSchema.pre('save', async function (done) {
   if (this.isModified('password')) {
     const hashed = await Password.toHash(this.get('password'));
     this.set('password', hashed);
   }
-  done();
+  return done();
 });
 
 const User = mongoose.model<UserModel>('user', userSchema);

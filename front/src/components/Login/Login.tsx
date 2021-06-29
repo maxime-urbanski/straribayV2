@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 import { CreationContainer } from "../../styles/containers";
@@ -15,29 +15,38 @@ const Login = () => {
   const handleInputPassword = (event: any) => {
     setValueInputPassword(event.target.value);
   };
+  useEffect(() => {}, [])
 
   const AUTHENTIFICATE = gql`
-    mutation auth($email: String!, $password: String!) {
-      auth(email: $email, password: $password) {
-        firstname
-        lastname
+    mutation login($email: String!, $password: String!) {
+      login(email: $email, password: $password) {
+        user {
+          firstname
+          lastname
+          email
+        }
         token
-        email
       }
     }
   `;
-  const [auth, { error, loading, data }] = useMutation(AUTHENTIFICATE);
+  const [login, { error, loading }] = useMutation(AUTHENTIFICATE);
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    auth({
+    login({
       variables: {
         email: valueInputEmail,
         password: valueInputPassword,
       }
     })
-      .then((response) => console.log(response.data.auth.token))
-      .catch((err) => console.log(err));
+    .then((response) => {
+      const token = response.data.login.token;
+      if (token) {
+        localStorage.setItem('token', token);
+      }
+    })      
+    .then(() => {history.push('/event-list')})
+    .catch((err) => console.log(err));
     };
 
   if (loading) return <p>Loading ...</p>;

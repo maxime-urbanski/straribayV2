@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import express from 'express';
 import mongoose from 'mongoose';
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import cors from 'cors';
 import { typeDefs } from './type/type';
 
@@ -11,25 +11,36 @@ const app = express();
 const port = 7777;
 // To do: put domain restriction
 app.use(cors());
-
+/*
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  // context: ({ req }) => {
-  //   // Note: This example uses the `req` argument to access headers,
-  //   // but the arguments received by `context` vary by integration.
-  //   // This means they vary for Express, Koa, Lambda, etc.
-  //   //
-  //   // To find out the correct arguments for a specific integration,
-  //   // see https://www.apollographql.com/docs/apollo-server/api/apollo-server/#middleware-specific-context-fields
+  context: ({ req }) => ({
+    authScope: getScope(req.headers.authorization)
+  })
+}));
 
-  //   // Get the user token from the headers.
-  //   const token = req.headers.authorization || '';
-
-  //   // Try to retrieve a user with the token
-  //   //const user = getUser(req.headers.email);
-
-  //   // Add the user to the context
+*/
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  // context: async ({ req }) => {
+  //   let token = req.headers.authorization || '';
+  //   const parts = token
+  //     .split('.')
+  //     .map((part) =>
+  //       Buffer.from(
+  //         part.replace(/-/g, '+').replace(/_/g, '/'),
+  //         'base64'
+  //       ).toString()
+  //     );
+  //   const payload = JSON.parse(parts[1]);
+  //   const { exp } = payload;
+  //   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  //   exp < new Date() ? (token = '') : token;
+  //   // eslint-disable-next-line no-underscore-dangle
+  //   const user = resolvers.Query.getUser('', payload._id);
+  //   if (!user) throw new AuthenticationError('you must be logged in');
   //   return { user };
   // },
 });

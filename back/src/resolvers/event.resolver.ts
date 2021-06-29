@@ -26,7 +26,7 @@ const eventResolver = {
       return <IEvent>event;
     },
     deleteAllEvents: async (_: unknown, args: { input: IId }) => {
-      const event = await Event.deleteOne({ _id: args.input });
+      await Event.deleteOne({ _id: args.input });
     },
   },
 };
