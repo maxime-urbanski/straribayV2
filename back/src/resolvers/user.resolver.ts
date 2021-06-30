@@ -45,7 +45,7 @@ const userResolver = {
           email,
         };
         token = jwt.sign(payload, 'tokhein', {
-          expiresIn: '24h',
+          expiresIn: '60d',
         });
       }
       return { token, user };

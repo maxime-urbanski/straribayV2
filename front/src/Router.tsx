@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Switch, Route, Redirect, useHistory } from "react-router-dom";
 import Layout from "./styles/Layout";
 
 import ChooseInfo from "./components/ChooseInfo/ChooseInfo";
@@ -36,8 +36,11 @@ function RouteWrapper({
 }
 
 function Router() {
-  let token = localStorage.getItem('token');
-  if (token) {
+  const history = useHistory();
+  const token = localStorage.getItem('token');
+  const [checkToken, setCheckToken] = useState('');
+
+  const checkingTokenDate = (token: string) => {
     let parts = token
       .split('.')
       .map((part) =>
@@ -48,16 +51,31 @@ function Router() {
       );
       const payload = JSON.parse(parts[1]);
       const { exp } = payload;
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      exp *1000 < new Date().getTime() ? (token = '') : token;
-      localStorage.setItem('token',token)
+      // new Date(exp*1000).toISOString() < new Date().toISOString() ?? setCheckToken('');
+      if (exp < Date.now() / 1000) {
+        localStorage.clear();
+        
+      }
   }
+
+
+  useEffect(() => {
+    
+    if (token) {
+      checkingTokenDate(token);
+      setCheckToken(token);
+    } else {
+      setCheckToken('');
+      // history.push('/');
+    }
+  }, [localStorage.getItem('token'),token, checkToken]);
   
   return (
     <BrowserRouter>
       <Switch>
-      {token ? 
+      {checkToken  ? 
       <>
+        <RouteWrapper exact path='/' component={EventList} layout={Layout} /> 
         <RouteWrapper
           path="/event-list"
           component={EventList}
@@ -74,9 +92,7 @@ function Router() {
       </>
       :
       <>
-        <Route exact path="/" component={Login}>
-        { token ? <Redirect to='/even-list' /> : <Login />} 
-        </Route>
+        <Route exact path="/" component={Login} />
         <Route path="/create-account" component={Signup} />
       </>
     }
