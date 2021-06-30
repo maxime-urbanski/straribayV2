@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Layout from "./styles/Layout";
 
 import ChooseInfo from "./components/ChooseInfo/ChooseInfo";
@@ -17,11 +17,12 @@ type RouterWrapper = {
   path: any;
 };
 
-function RouteWrapper({
+function RouteWrapper({ 
   component: Component,
   layout: Layout,
   ...rest
 }: RouterWrapper): JSX.Element {
+
   return (
     <Route
       {...rest}
@@ -49,7 +50,9 @@ function Router() {
       const { exp } = payload;
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       exp *1000 < new Date().getTime() ? (token = '') : token;
+      localStorage.setItem('token',token)
   }
+  
   return (
     <BrowserRouter>
       <Switch>
@@ -68,11 +71,12 @@ function Router() {
         <RouteWrapper path="/create-event" component={Home} layout={Layout} />
         <RouteWrapper path="/invit" component={ChooseInvit} layout={Layout} />
         <RouteWrapper path="/details" component={EventDetail} layout={Layout} />
-        <RouteWrapper path="/login" component={Login} layout={Layout} />
       </>
       :
       <>
-        <Route exact path="/" component={Login} />
+        <Route exact path="/" component={Login}>
+        { token ? <Redirect to='/even-list' /> : <Login />} 
+        </Route>
         <Route path="/create-account" component={Signup} />
       </>
     }

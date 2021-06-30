@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 import { CreationContainer } from "../../styles/containers";
@@ -15,7 +15,6 @@ const Login = () => {
   const handleInputPassword = (event: any) => {
     setValueInputPassword(event.target.value);
   };
-  useEffect(() => {}, [])
 
   const AUTHENTIFICATE = gql`
     mutation login($email: String!, $password: String!) {
@@ -31,9 +30,9 @@ const Login = () => {
   `;
   const [login, { error, loading }] = useMutation(AUTHENTIFICATE);
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    login({
+    await login({
       variables: {
         email: valueInputEmail,
         password: valueInputPassword,
@@ -45,7 +44,11 @@ const Login = () => {
         localStorage.setItem('token', token);
       }
     })      
-    .then(() => {history.push('/event-list')})
+    .then(() => {
+      history.push('/event-list')
+      history.go(0)
+    }
+    )
     .catch((err) => console.log(err));
     };
 
