@@ -6,13 +6,11 @@ import { IEvent, IInputEvent, IId } from '../interface/event.interface';
 const eventResolver = {
   Query: {
     getEvent: async (_: unknown, { _id }: { _id: string }): Promise<IEvent> => {
-      console.log('id', _id);
       const event = await Event.findOne({ _id });
       return <IEvent>event;
     },
     getEvents: async () => {
       const events = await Event.find({});
-      console.log('event find :', events);
       return events;
     },
   },
@@ -25,7 +23,7 @@ const eventResolver = {
       const event = await Event.create(args.input);
       return <IEvent>event;
     },
-    deleteAllEvents: async (_: unknown, args: { input: IId }) => {
+    deleteEvent: async (_: unknown, args: { input: IId }) => {
       await Event.deleteOne({ _id: args.input });
     },
   },

@@ -23,7 +23,9 @@ export const Input = styled.input`
 
 export const Title = styled.h3`
   color: ${({theme}) => theme.blue};
+  font-size: 22px;
   font-weight: ${({theme}) => theme.bold};
+  margin: 30px;
 `;
 
 export const Text = styled.p`

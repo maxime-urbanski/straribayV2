@@ -3,6 +3,10 @@ import React from "react";
 import { Card, CardBody, CardPicture, CardText, CardButtons } from "../../styles/containers";
 import { Button, CardTitle, Text } from "../../styles/elements";
 
+import { gql, useMutation } from "@apollo/client";
+
+import './eventCard.css';
+
 export interface IEventCard {
   title: string;
   theme: string;
@@ -12,6 +16,21 @@ export interface IEventCard {
   infos?: string;
   image?: string;
 }
+
+const DELETE_EVENT = gql`
+  mutation DeleteEvent {
+    deleteEvent {
+      _id
+      title
+      date
+      hour
+      description
+      infos
+      theme
+      image
+    }
+  }
+`;
 
 const EventCard: React.FC<IEventCard> = ({
   title,
@@ -27,7 +46,7 @@ const EventCard: React.FC<IEventCard> = ({
       <CardPicture alt='event picture' src={image}/>
       <CardBody>
         <div><CardTitle>{title}</CardTitle></div>
-        <div style={{display: 'flex', width: '100%', justifyContent: 'space-between'}}>
+        <div className="textContainer">
           <CardText>
             <Text>{theme}</Text>
             <Text>{date}</Text>
@@ -37,10 +56,10 @@ const EventCard: React.FC<IEventCard> = ({
             <Text>{description}</Text>
             <Text>{infos}</Text>
           </CardText>
-        <CardButtons>
-          <Button>ATTEND</Button>
-          <Button>DETAILS</Button>
-        </CardButtons>
+          <CardButtons>
+            <Button>ATTEND</Button>
+            <Button>DETAILS</Button>
+          </CardButtons>
         </div>
       </CardBody>
     </Card>

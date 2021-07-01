@@ -32,7 +32,6 @@ export const BottomContainer = styled.div`
 export const LastContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin: 100px 0 0 100px;
   width: 100%;
   max-height: 100%;
@@ -54,6 +53,7 @@ export const CreationContainer = styled.div`
 `;
 
 export const Card = styled.div`
+  width: 90%;
   height: 300px;
   display: flex;
   margin: 0 50px 50px 50px;
@@ -61,11 +61,21 @@ export const Card = styled.div`
   -webkit-box-shadow: 0px 5px 10px 0px rgba(51, 50, 50, 0.63);
   -moz-box-shadow: 0px 5px 10px 0px rgba(51, 50, 50, 0.63);
   box-shadow: 0px 5px 10px 0px rgba(51, 50, 50, 0.63);
+
+  @media (max-width: 1300px) {
+    flex-direction: column;
+    height: auto;
+    width: 400px;
+  }
 `;
 
 export const CardPicture = styled.img`
   border-radius: 10px 0 0 10px;
   max-height: 300px;
+
+  @media (max-width: 1300px) {
+    border-radius: 10px 10px 0 0;
+  }
 `
 
 export const CardBody = styled.div`
@@ -74,12 +84,18 @@ export const CardBody = styled.div`
   width: 100%;
   flex-direction: column;
   padding: 20px;
+
+  @media (max-width: 1300px) {
+    flex-direction: column;
+    width: auto;
+  }
 `
 
 export const CardText = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin-right: 20px;
 `
 
 export const CardButtons = styled.div`
@@ -87,4 +103,8 @@ export const CardButtons = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
+
+  @media (max-width: 1300px) {
+    align-items: center;
+  }
 `

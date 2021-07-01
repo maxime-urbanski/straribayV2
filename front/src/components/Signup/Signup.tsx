@@ -33,14 +33,11 @@ const Signup = () => {
     setValueInputConfirmPassword(event.target.value);
   };
 
-  // TODO: remove PASSWORD !!!!!!!!
-
   const ADD_USER = gql`
     mutation AddUser($input: InputUser) {
       addUser(input: $input) {
         firstname
         lastname
-        password
         email
       }
     }

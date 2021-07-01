@@ -44,9 +44,9 @@ const Details = (props: any): JSX.Element => {
         },
       },
     })
-    .then((response)=> console.log(response.data))
+    .then(() => history.go(0))
+    .then(() => history.push("/event-list"))
     .catch((err)=> console.log(err))
-    .finally(() => history.push("/event-list"))
   }
 
   return (
@@ -59,14 +59,6 @@ const Details = (props: any): JSX.Element => {
         <h3>{date}</h3>
         <h3>{hour}</h3>
         <h3>{info}</h3>
-        {/* <h3>
-          Only <span></span>
-          {attending} can attend
-        </h3>
-        <h3>
-          You&apos;ve invited <span></span>
-          {userSelected}
-        </h3> */}
         <Button onClick={handleSubmit}>Add this event ? </Button>
       </CreationContainer>
     </>

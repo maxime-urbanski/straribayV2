@@ -28,6 +28,7 @@ const Home = (): JSX.Element => {
         <ThemeSelect handleSelect={handleSelect} />
         <h4>Give a description to your event </h4>
         <textarea value={valueInputArea} onChange={handleArea} />
+        {valueInputTitle && valueInputArea && valueInputTheme ?
         <Link
           to={{
             pathname: "/choose-info",
@@ -40,6 +41,9 @@ const Home = (): JSX.Element => {
         >
           <Button>NEXT</Button>
         </Link>
+        :
+        <Button notValid>Next</Button>
+        }
       </CreationContainer>
     </>
   );

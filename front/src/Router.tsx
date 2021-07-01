@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Layout from "./styles/Layout";
 
 import ChooseInfo from "./components/ChooseInfo/ChooseInfo";
@@ -36,7 +36,6 @@ function RouteWrapper({
 }
 
 function Router() {
-  const history = useHistory();
   const token = localStorage.getItem('token');
   const [checkToken, setCheckToken] = useState('');
 
@@ -68,7 +67,7 @@ function Router() {
       setCheckToken('');
       // history.push('/');
     }
-  }, [localStorage.getItem('token'),token, checkToken]);
+  }, [token, checkToken]);
   
   return (
     <BrowserRouter>

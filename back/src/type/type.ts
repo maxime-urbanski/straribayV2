@@ -75,7 +75,7 @@ export const typeDefs = gql`
     addEvent(input: InputEvent): Event
     auth(email: String!, password: String!): AuthUser
     login(email: String!, password: String!): AuthPayload
-    deleteAllEvents(input: InputId): Event
+    deleteEvent(input: InputId): Event
   }
 
   type AuthPayload {
