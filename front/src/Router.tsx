@@ -54,7 +54,7 @@ function Router() {
       // new Date(exp*1000).toISOString() < new Date().toISOString() ?? setCheckToken('');
       if (exp < Date.now() / 1000) {
         localStorage.clear();
-        
+
       }
   }
 
