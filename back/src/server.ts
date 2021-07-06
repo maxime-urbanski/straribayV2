@@ -4,8 +4,10 @@ import mongoose from 'mongoose';
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import cors from 'cors';
 import { typeDefs } from './type/type';
+import { verify } from 'jsonwebtoken';
 
 import resolvers from './resolvers';
+import User from './models/User';
 
 const app = express();
 const port = 7777;
@@ -24,25 +26,22 @@ const server = new ApolloServer({
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  // context: async ({ req }) => {
-  //   let token = req.headers.authorization || '';
-  //   const parts = token
-  //     .split('.')
-  //     .map((part) =>
-  //       Buffer.from(
-  //         part.replace(/-/g, '+').replace(/_/g, '/'),
-  //         'base64'
-  //       ).toString()
-  //     );
-  //   const payload = JSON.parse(parts[1]);
-  //   const { exp } = payload;
-  //   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  //   exp < new Date() ? (token = '') : token;
-  //   // eslint-disable-next-line no-underscore-dangle
-  //   const user = resolvers.Query.getUser('', payload._id);
-  //   if (!user) throw new AuthenticationError('you must be logged in');
-  //   return { user };
-  // },
+  context: async ({ req }) => {
+    const token = req.headers.authorization
+    const tok= token?.split(' ')[1]
+    console.log("Token", tok)
+    if (tok)  {
+      console.log("J'suis là !!")
+      const test:any = verify(tok, 'tokhein')
+      console.log("Test",test['_id'])
+      const user = await User.findOne({ email: test['email'] })
+      if (!user) throw Error('you must be logged in');	
+      return { user };     
+    }
+
+    // Récup le user en fonction du token
+  }
+  
 });
 server.applyMiddleware({ app });
 
@@ -52,8 +51,8 @@ const start = async () => {
       // Todo : Make a dotenv !!!
       // TIP: if you don't use docker, uncomment the next line.
       // ,
-      //'mongodb://127.0.0.1:27017/virtualschool',
-       'mongodb://mongodb:27017/virtualschool',
+      //'mongodb://mongodb:27017/virtualschool',
+      'mongodb://127.0.0.1:27017/virtualschool',
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

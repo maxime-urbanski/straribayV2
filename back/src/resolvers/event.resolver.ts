@@ -5,13 +5,17 @@ import { IEvent, IInputEvent, IId } from '../interface/event.interface';
 
 const eventResolver = {
   Query: {
-    getEvent: async (_: unknown, { _id }: { _id: string }): Promise<IEvent> => {
+    getEvent: async (_: unknown, { _id }: { _id: string }, context: any): Promise<IEvent | null> => {
+      if(!context) {return null }
       const event = await Event.findOne({ _id });
       return <IEvent>event;
     },
-    getEvents: async () => {
-      const events = await Event.find({});
+    getEvents: async (context:any) => {
+     
+        const events = await Event.find({});
+      
       return events;
+   
     },
   },
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Layout from "./styles/Layout";
 
 import ChooseInfo from "./components/ChooseInfo/ChooseInfo";
 import Home from "./components/Home/Home";
@@ -9,6 +8,10 @@ import ChooseInvit from "./components/ChooseInvit/ChooseInvit";
 import EventDetail from "./components/EventDetail/EventDetail";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
+import Unauthorized from "./components/Unauthorized/Unauthorized";
+
+import Layout from "./styles/Layout";
+import SecondLayout from "./styles/SecondLayout";
 
 type RouterWrapper = {
   component: any;
@@ -72,7 +75,7 @@ function Router() {
   return (
     <BrowserRouter>
       <Switch>
-      {checkToken  ? 
+      {token  ? 
       <>
         <RouteWrapper exact path='/' component={EventList} layout={Layout} /> 
         <RouteWrapper
@@ -85,7 +88,7 @@ function Router() {
           component={ChooseInfo}
           layout={Layout}
         />
-        <RouteWrapper path="/create-event" component={Home} layout={Layout} />
+        <RouteWrapper path="/create-event" component={Home} layout={SecondLayout} />
         <RouteWrapper path="/invit" component={ChooseInvit} layout={Layout} />
         <RouteWrapper path="/details" component={EventDetail} layout={Layout} />
       </>
@@ -93,6 +96,11 @@ function Router() {
       <>
         <Route exact path="/" component={Login} />
         <Route path="/create-account" component={Signup} />
+        <Route path="/event-list" component={Unauthorized} />
+        <Route path="/choose-info" component={Unauthorized} />
+        <Route path="/create-event" component={Unauthorized} />
+        <Route path="/invit" component={Unauthorized} />
+        <Route path="/details" component={Unauthorized} />
       </>
     }
       </Switch>

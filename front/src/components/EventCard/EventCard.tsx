@@ -18,19 +18,14 @@ export interface IEventCard {
 }
 
 const DELETE_EVENT = gql`
-  mutation DeleteEvent {
-    deleteEvent {
+  mutation DeleteEvent ($input: InputId) {
+    deleteEvent(input: $input) {
       _id
-      title
-      date
-      hour
-      description
-      infos
-      theme
-      image
     }
   }
 `;
+
+
 
 const EventCard: React.FC<IEventCard> = ({
   title,
@@ -45,6 +40,7 @@ const EventCard: React.FC<IEventCard> = ({
     <Card>
       <CardPicture alt='event picture' src={image}/>
       <CardBody>
+        <div>X</div>
         <div><CardTitle>{title}</CardTitle></div>
         <div className="textContainer">
           <CardText>

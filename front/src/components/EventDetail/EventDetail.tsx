@@ -44,8 +44,8 @@ const Details = (props: any): JSX.Element => {
         },
       },
     })
-    .then(() => history.go(0))
     .then(() => history.push("/event-list"))
+    .then(() => history.go(0))
     .catch((err)=> console.log(err))
   }
 

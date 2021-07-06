@@ -6,12 +6,13 @@ import { setContext } from '@apollo/client/link/context';
 import theme from "./styles/theme";
 
 const httpLink = createHttpLink({
-  uri: 'https://prod.straribay.wns.wilders.dev/api/graphql',
-  // uri: 'http://localhost:7777/graphql' 
+  uri: 'http://localhost:7777/graphql' 
+  // uri: 'https://prod.straribay.wns.wilders.dev/api/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('token');
+  
   return {
     headers: {
       ...headers,
