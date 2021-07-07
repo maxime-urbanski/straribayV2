@@ -23,25 +23,21 @@ const server = new ApolloServer({
 }));
 
 */
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: async ({ req }) => {
-    const token = req.headers.authorization
-    const tok= token?.split(' ')[1]
-    console.log("Token", tok)
-    if (tok)  {
-      console.log("J'suis là !!")
-      const test:any = verify(tok, 'tokhein')
-      console.log("Test",test['_id'])
-      const user = await User.findOne({ email: test['email'] })
-      if (!user) throw Error('you must be logged in');	
-      return { user };     
+    const bearerToken = req.headers.authorization || '';
+    if (bearerToken) {
+      const token = bearerToken.split(' ')[1];
+      const verifyToken: any = verify(token, 'tokhein');
+      const user = await User.findOne({ email: verifyToken['email'] });
+      if (!user) throw new AuthenticationError('you must be logged in');
+      // if (user) delete user.password;
+      return { user };
     }
-
-    // Récup le user en fonction du token
-  }
-  
+  },
 });
 server.applyMiddleware({ app });
 

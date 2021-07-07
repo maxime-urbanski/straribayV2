@@ -9,7 +9,7 @@ export interface UserModel extends mongoose.Document {
   lastname: string;
   email: string;
   password: string;
-  // role: string;
+  role: string;
 }
 
 const userSchema = new Schema({
@@ -31,10 +31,10 @@ const userSchema = new Schema({
     required: true,
     minlenght: 8,
   },
-  // role: {
-  //   type: String,
-  //   default: 'USER',
-  // },
+  role: {
+    type: String,
+    default: 'USER',
+  },
   // group: String,
 });
 

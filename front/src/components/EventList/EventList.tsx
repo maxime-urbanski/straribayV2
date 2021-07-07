@@ -3,7 +3,7 @@ import EventCard from "../EventCard/EventCard";
 import { Title } from "../../styles/elements";
 import { gql, useQuery } from "@apollo/client";
 
-import './eventList.css';
+import styles from './eventList.module.css';
 
 interface Props {
   _id: string;
@@ -31,7 +31,6 @@ const GET_EVENTS = gql`
   }
 `;
 
-
 function EventList() {
   const { data, loading, error } = useQuery(GET_EVENTS);
 
@@ -41,11 +40,12 @@ function EventList() {
   return (
     <>
       <Title>List of available events</Title>
-      <div className="container">
+      <div className={styles.container}>
         {data.getEvents.map(
           ({ _id, title, theme, date, hour, description, infos, image }: Props) => (
             <EventCard
               key={_id}
+              _id={_id}
               title={title}
               theme={theme}
               date={new Date(date * 1).toLocaleDateString()}

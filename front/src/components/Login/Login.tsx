@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
+
 import { CreationContainer } from "../../styles/containers";
 import { Button, Title, Input } from "../../styles/elements";
+
+import styles from "./login.module.css";
 
 const Login = () => {
   const [valueInputEmail, setValueInputMail] = useState("");
@@ -23,6 +26,7 @@ const Login = () => {
           firstname
           lastname
           email
+          role
         }
         token
       }
@@ -47,31 +51,36 @@ const Login = () => {
     .then(() => {
       history.push('/event-list')
       history.go(0)
-    }
-    )
+    })
     .catch((err) => console.log(err));
-    };
+  };
 
   if (loading) return <p>Loading ...</p>;
   if (error) return <p>Error! {error.message}</p>;
   return (
-    <>
-      <Title>Connection</Title>
-      <CreationContainer>
-        <h4>Your Email</h4>
-        <Input value={valueInputEmail} type="text" onChange={handleInputMail} />
-        <h4>Your Password</h4>
-        <Input
-          value={valueInputPassword}
-          type="password"
-          onChange={handleInputPassword}
-        />
-        <Button onClick={handleSubmit}>Connect</Button>
-        <p>
-          No account yet ? <Link to="/create-account">Create one here</Link>
-        </p>
-      </CreationContainer>
-    </>
+    <div className={styles.main}>
+      <div className={styles.container}>
+        <Title>Log in to your Straribay account !</Title>
+        <CreationContainer>
+          <h4>Your Email</h4>
+          <Input value={valueInputEmail} type="text" onChange={handleInputMail} />
+          <h4>Your Password</h4>
+          <Input
+            value={valueInputPassword}
+            type="password"
+            onChange={handleInputPassword}
+          />
+          {valueInputEmail. length > 0 && valueInputPassword.length > 0 ?
+          <Button onClick={handleSubmit}>Connect</Button>
+          :
+          <Button notValid>Connect</Button>
+          }
+          <p>
+            No account yet ? <Link to="/create-account">Create one here</Link>
+          </p>
+        </CreationContainer>
+      </div>
+    </div>
   );
 };
 

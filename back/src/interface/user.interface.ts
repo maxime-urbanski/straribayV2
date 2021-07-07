@@ -5,6 +5,7 @@ export interface InputUser extends Document {
   lastname: string;
   email: string;
   password: string;
+  role: string;
 }
 
 export interface IUser extends Document {

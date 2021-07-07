@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+
 import { CreationContainer } from "../../styles/containers";
 import { Button, Title, Input } from "../../styles/elements";
+
+import styles from "./signup.module.css";
 
 const Signup = () => {
   const [valueInputFirstname, setValueInputFirstname] = useState("");
@@ -12,7 +15,7 @@ const Signup = () => {
   const [valueInputConfirmPassword, setValueInputConfirmPassword] =
     useState("");
 
-  let history = useHistory();
+  const history = useHistory();
   const handleInputFirstname = (event: any) => {
     setValueInputFirstname(event.target.value);
   };
@@ -65,54 +68,57 @@ const Signup = () => {
   };
 
   return (
-    <>
-      <Title>Créer un compte</Title>
-      <CreationContainer>
-        <h4>Your firstname</h4>
-        <Input
-          value={valueInputFirstname}
-          type="text"
-          onChange={handleInputFirstname}
-          required
-        />
-        <h4>Your lastname</h4>
-        <Input
-          value={valueInputLastname}
-          type="text"
-          onChange={handleInputLastname}
-          required
-        />
-        <h4>Your email</h4>
-        <Input
-          value={valueInputEmail}
-          type="text"
-          onChange={handleInputMail}
-          required
-        />
-        <h4>Your password</h4>
-        <Input
-          value={valueInputPassword}
-          type="password"
-          onChange={handleInputPassword}
-          required
-        />
-        <h4>Confirm your password</h4>
-        <Input
-          value={valueInputConfirmPassword}
-          type="password"
-          onChange={handleInputConfirmPassword}
-          required
-        />
-        {!goodPassword && valueInputConfirmPassword.length > 0 ? (
-          <p>Passwords are not the same</p>
-        ) : null}
-        {goodPassword ? (
-          <Button onClick={handleSubmit}>Connect</Button>
-        ) : (
-          <Button notValid>Connect</Button>
-        )}
-      </CreationContainer>
-    </>
+    <div className={styles.main}>
+      <div className={styles.container}>
+        <Title>Create an account on Straribay !</Title>
+        <CreationContainer>
+          <h4>Your firstname</h4>
+          <Input
+            value={valueInputFirstname}
+            type="text"
+            onChange={handleInputFirstname}
+            required
+          />
+          <h4>Your lastname</h4>
+          <Input
+            value={valueInputLastname}
+            type="text"
+            onChange={handleInputLastname}
+            required
+          />
+          <h4>Your email</h4>
+          <Input
+            value={valueInputEmail}
+            type="text"
+            onChange={handleInputMail}
+            required
+          />
+          <h4>Your password</h4>
+          <Input
+            value={valueInputPassword}
+            type="password"
+            onChange={handleInputPassword}
+            required
+          />
+          <h4>Confirm your password</h4>
+          <Input
+            value={valueInputConfirmPassword}
+            type="password"
+            onChange={handleInputConfirmPassword}
+            required
+          />
+          {!goodPassword && valueInputConfirmPassword.length > 0 ? (
+            <p>Passwords are not the same</p>
+          ) : null}
+          {goodPassword ? (
+            <Button onClick={handleSubmit}>Connect</Button>
+          ) : (
+            <Button notValid>Connect</Button>
+          )}
+          <p>Already got an account ? <Link to="/">Go to login</Link></p>
+        </CreationContainer>
+      </div>
+    </div>
   );
 };
 

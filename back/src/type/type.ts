@@ -26,6 +26,7 @@ export const typeDefs = gql`
     lastname: String!
     email: String!
     password: String!
+    role: String
   }
 
   type User {
@@ -34,6 +35,7 @@ export const typeDefs = gql`
     lastname: String!
     email: String!
     password: String!
+    role: String
   }
 
   type Event {
@@ -75,7 +77,7 @@ export const typeDefs = gql`
     addEvent(input: InputEvent): Event
     auth(email: String!, password: String!): AuthUser
     login(email: String!, password: String!): AuthPayload
-    deleteEvent(input: InputId): Event
+    deleteEvent(input: InputId): Boolean
   }
 
   type AuthPayload {

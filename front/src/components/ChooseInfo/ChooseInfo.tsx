@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { CreationContainer } from "../../styles/containers";
 import { Button, Title } from "../../styles/elements";
 
-import "./chooseInfo.css";
+import styles from "./chooseInfo.module.css";
 
 const ChooseInfo = (props: any) => {
   const { title, description, theme } = props.location.state;
@@ -34,15 +34,15 @@ const ChooseInfo = (props: any) => {
     <>
       <Title>Create your Event</Title>
       <CreationContainer>
-        <input className="input"
+        <input className={styles.input}
           value={date}
           onChange={handleDate}
           type="date"
           min={new Date().toString()}
           max="01-01-2030"
         />
-        <input value={hour} onChange={handleHour} type="time" className="input"/>
-        <textarea value={info} onChange={handleInfo} className="input"/>
+        <input value={hour} onChange={handleHour} type="time" className={styles.input}/>
+        <textarea value={info} onChange={handleInfo} className={styles.input}/>
         {date && hour && info ?
         <Link
           to={{

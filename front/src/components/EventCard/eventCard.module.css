@@ -1,0 +1,32 @@
+.textContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  width: 31px;
+  height: 31px;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.cross {
+  fill: #17303F;
+  cursor: pointer;
+  width: 31px; 
+  height: 31px;
+  margin-left: 20px;
+}
+
+@media (max-width: 1300px) {
+  .textContainer {
+    flex-direction: column;
+  }
+}

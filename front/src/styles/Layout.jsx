@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
   const history = useHistory(true);
 
   function logout() {
-    localStorage.clear();
+    localStorage.removeItem("token");
     history.push('/');
     history.go(0);
   }
