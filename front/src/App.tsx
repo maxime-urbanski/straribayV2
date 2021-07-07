@@ -8,20 +8,21 @@ import { UserContext } from "./UserContext";
 
 import theme from "./styles/theme";
 
+const backUrl = process.env.REACT_APP_BACK_URL;
+
 const httpLink = createHttpLink({
-  uri: 'http://localhost:7777/graphql' 
-  // uri: 'https://prod.straribay.wns.wilders.dev/api/graphql',
+  uri: `${backUrl}/graphql`,
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   if (token) {
     return {
       headers: {
         ...headers,
         authorization: token ? `Bearer ${token}` : "",
-      }
-    }
+      },
+    };
   }
 });
 
@@ -30,7 +31,7 @@ const App = (): JSX.Element => {
 
   const client = new ApolloClient({
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
   });
 
   return (
