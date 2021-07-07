@@ -6,16 +6,16 @@ import { gql } from 'apollo-server-express';
 export const typeDefs = gql`
   scalar Time
 
-  input InputId {
+  input IId {
     _id: String!
   }
 
   input InputEvent {
+    userId: String!
     title: String!
     theme: String!
     date: String!
     hour: String!
-    author: String
     description: String!
     infos: String!
     image: String
@@ -40,11 +40,11 @@ export const typeDefs = gql`
 
   type Event {
     _id: String
+    userId: String
     title: String
     theme: String
     date: String
     hour: String
-    author: String
     description: String
     infos: String
     image: String
@@ -77,7 +77,7 @@ export const typeDefs = gql`
     addEvent(input: InputEvent): Event
     auth(email: String!, password: String!): AuthUser
     login(email: String!, password: String!): AuthPayload
-    deleteEvent(input: InputId): Boolean
+    deleteEvent(input: IId): Event
   }
 
   type AuthPayload {

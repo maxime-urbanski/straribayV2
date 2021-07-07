@@ -2,11 +2,17 @@ import * as mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-export interface EnventModel extends mongoose.Document {
+export interface IAuthor {
+  firstname: string;
+  lastname: string;
+  email: string;
+}
+
+export interface EventModel extends mongoose.Document {
   title: string;
   date: Date;
   hour: string;
-  author: string;
+  author: IAuthor;
   description: string;
   infos: string;
   image: string;
@@ -28,7 +34,7 @@ const eventSchema = new Schema({
     required: false,
   },
   author: {
-    type: String,
+    type: [{firstname: String, lastname: String, email: String}],
     required: false,
   },
   description: {
@@ -49,6 +55,6 @@ const eventSchema = new Schema({
   },
 });
 
-const Event = mongoose.model('event', eventSchema);
+const Event = mongoose.model<EventModel>('event', eventSchema);
 
 export default Event;

@@ -40,7 +40,6 @@ function RouteWrapper({
 
 function Router() {
   const token = localStorage.getItem('token');
-  const [checkToken, setCheckToken] = useState('');
 
   const checkingTokenDate = (token: string) => {
     let parts = token
@@ -53,24 +52,11 @@ function Router() {
       );
       const payload = JSON.parse(parts[1]);
       const { exp } = payload;
-      // new Date(exp*1000).toISOString() < new Date().toISOString() ?? setCheckToken('');
       if (exp < Date.now() / 1000) {
         localStorage.clear();
 
       }
   }
-
-
-  useEffect(() => {
-    
-    if (token) {
-      checkingTokenDate(token);
-      setCheckToken(token);
-    } else {
-      setCheckToken('');
-      // history.push('/');
-    }
-  }, [token, checkToken]);
   
   return (
     <BrowserRouter>

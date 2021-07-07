@@ -2,6 +2,8 @@ import React from "react";
 import { gql, useMutation } from "@apollo/client";
 import { useHistory } from "react-router";
 
+import { IAuthor } from '../EventList/EventList';
+
 import { Card, CardBody, CardPicture, CardText, CardButtons } from "../../styles/containers";
 import { Button, CardTitle, Text } from "../../styles/elements";
 
@@ -11,23 +13,28 @@ import styles from './eventCard.module.css';
 
 export interface IEventCard {
   _id: string;
+  author: IAuthor;
   title: string;
   theme: string;
   date: Date | string | any;
   hour: string;
   description: string;
-  infos?: string;
-  image?: string;
+  infos: string;
+  image: string;
+  loggedEmail: string;
 }
 
 const DELETE_EVENT = gql`
   mutation deleteEvent ($input: IId) {
-    deleteEvent(input: $input)
+    deleteEvent(input: $input){
+      _id
+    }
   }
 `;
 
 const EventCard: React.FC<IEventCard> = ({
   _id,
+  author,
   title,
   theme,
   date,
@@ -35,17 +42,14 @@ const EventCard: React.FC<IEventCard> = ({
   description,
   infos,
   image,
+  loggedEmail,
 }) => {
   const history = useHistory();
   const [deleteEvent] = useMutation(DELETE_EVENT);
-
-  const adminUser = () => {
-    if (localStorage.getItem('token')) return true;
-  }
   
-  const handleDeleteEvent = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleDeleteEvent = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    deleteEvent({
+    await deleteEvent({
       variables: {
         input: {
           _id: _id,
@@ -62,13 +66,14 @@ const EventCard: React.FC<IEventCard> = ({
       <CardBody>
         <div className={styles.titleContainer}>
           <CardTitle>{title}</CardTitle>
-          {adminUser ??
-            <img className={styles.cross} src={cross} alt="delete-event"/>
+          {author.email === loggedEmail && 
+            <button className={styles.button} onClick={handleDeleteEvent}>
+              <img  className={styles.cross} src={cross} alt="delete-event"/>
+            </button>
           }
         </div>
         <div className={styles.textContainer}>
           <CardText>
-            <Text>{_id}</Text>
             <Text>{theme}</Text>
             <Text>{date}</Text>
             <Text>{hour}</Text>

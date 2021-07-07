@@ -10,9 +10,9 @@
 }
 
 .button {
-  width: 31px;
   height: 31px;
-  padding: 0;
+  padding: 0px;
+  margin: 8px 0 0 20px;
   border: none;
   background: none;
 }
@@ -22,7 +22,6 @@
   cursor: pointer;
   width: 31px; 
   height: 31px;
-  margin-left: 20px;
 }
 
 @media (max-width: 1300px) {
