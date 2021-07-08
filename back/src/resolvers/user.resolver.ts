@@ -29,7 +29,6 @@ const userResolver = {
       _: unknown,
       args: { email: string; password: string }
     ): Promise<IAuth> => {
-      console.log('je suis la ');
       let token = '';
       const emailRequest = args.email;
       const passwordRequest = args.password;

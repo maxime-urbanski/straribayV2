@@ -10,6 +10,9 @@ services:
     restart: always
     environment:
       - NODE_ENV=production
+      - JWT_SECRET=${JWT_SECRET}
+      - DB_NAME=${DB_NAME}
+      - SERVER_PORT=7777
 
   straribay_front:
     command: sh -c "npm run build"
