@@ -11,7 +11,6 @@ export const typeDefs = gql`
   }
 
   input InputEvent {
-    userId: String!
     title: String!
     theme: String!
     date: String!
@@ -38,9 +37,15 @@ export const typeDefs = gql`
     role: String
   }
 
+  type Author {
+    firstname: String
+    lastname: String
+    email: String
+  }
+  
   type Event {
     _id: String
-    userId: String
+    author: Author
     title: String
     theme: String
     date: String

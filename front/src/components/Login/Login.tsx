@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 
 import { CreationContainer } from "../../styles/containers";
 import { Button, Title, Input } from "../../styles/elements";
+import { UserContext } from "../../UserContext";
 
 import styles from "./login.module.css";
 
 const Login = () => {
+  const { userEmail, setUserEmail } = useContext(UserContext);
   const [valueInputEmail, setValueInputMail] = useState("");
   const [valueInputPassword, setValueInputPassword] = useState("");
   const handleInputMail = (event: any) => {
@@ -46,11 +48,12 @@ const Login = () => {
       const token = response.data.login.token;
       if (token) {
         localStorage.setItem('token', token);
+        setUserEmail(response.data.login.user.email);
       }
     })      
     .then(() => {
-      history.push('/event-list')
-      history.go(0)
+      history.push("/event-list")
+      // history.go(0)
     })
     .catch((err) => console.log(err));
   };

@@ -34,7 +34,7 @@ const eventSchema = new Schema({
     required: false,
   },
   author: {
-    type: [{firstname: String, lastname: String, email: String}],
+    type: {firstname: String, lastname: String, email: String},
     required: false,
   },
   description: {

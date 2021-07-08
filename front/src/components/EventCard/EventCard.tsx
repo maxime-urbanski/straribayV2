@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { useHistory } from "react-router";
 
@@ -6,6 +6,7 @@ import { IAuthor } from '../EventList/EventList';
 
 import { Card, CardBody, CardPicture, CardText, CardButtons } from "../../styles/containers";
 import { Button, CardTitle, Text } from "../../styles/elements";
+import { UserContext } from "../../UserContext";
 
 import cross from "../../assets/delete.svg";
 
@@ -21,7 +22,6 @@ export interface IEventCard {
   description: string;
   infos: string;
   image: string;
-  loggedEmail: string;
 }
 
 const DELETE_EVENT = gql`
@@ -32,7 +32,7 @@ const DELETE_EVENT = gql`
   }
 `;
 
-const EventCard: React.FC<IEventCard> = ({
+const EventCard = ({
   _id,
   author,
   title,
@@ -42,8 +42,8 @@ const EventCard: React.FC<IEventCard> = ({
   description,
   infos,
   image,
-  loggedEmail,
-}) => {
+}: IEventCard) => {
+  const { userEmail } = useContext(UserContext);
   const history = useHistory();
   const [deleteEvent] = useMutation(DELETE_EVENT);
   
@@ -57,7 +57,7 @@ const EventCard: React.FC<IEventCard> = ({
       },
     })
     .catch((err) => console.log(err))
-    .finally(() => history.go(0));
+    // .finally(() => history.go(0));
   }
 
   return (
@@ -66,7 +66,7 @@ const EventCard: React.FC<IEventCard> = ({
       <CardBody>
         <div className={styles.titleContainer}>
           <CardTitle>{title}</CardTitle>
-          {author.email === loggedEmail && 
+          { author.email === userEmail && 
             <button className={styles.button} onClick={handleDeleteEvent}>
               <img  className={styles.cross} src={cross} alt="delete-event"/>
             </button>

@@ -54,7 +54,6 @@ function Router() {
       const { exp } = payload;
       if (exp < Date.now() / 1000) {
         localStorage.clear();
-
       }
   }
   
@@ -72,11 +71,11 @@ function Router() {
         <RouteWrapper
           path="/choose-info"
           component={ChooseInfo}
-          layout={Layout}
+          layout={SecondLayout}
         />
         <RouteWrapper path="/create-event" component={Home} layout={SecondLayout} />
-        <RouteWrapper path="/invit" component={ChooseInvit} layout={Layout} />
-        <RouteWrapper path="/details" component={EventDetail} layout={Layout} />
+        <RouteWrapper path="/invit" component={ChooseInvit} layout={SecondLayout} />
+        <RouteWrapper path="/details" component={EventDetail} layout={SecondLayout} />
       </>
       :
       <>

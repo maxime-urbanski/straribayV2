@@ -9,7 +9,6 @@ import { gql, useMutation } from "@apollo/client";
 const ADD_EVENT = gql`
   mutation AddEvent($input: InputEvent) {
     addEvent(input: $input) {
-      userId
       title
       date
       hour
@@ -22,8 +21,7 @@ const ADD_EVENT = gql`
 `;
 
 const Details = (props: any): JSX.Element => {
-  let history = useHistory();
-  const userId = "hello"; 
+  let history = useHistory(); 
   const { event, picture } = props.location.state;
   const { title, description, theme, date, hour, info } = event;
   const [addEvent] = useMutation(ADD_EVENT);
@@ -33,7 +31,6 @@ const Details = (props: any): JSX.Element => {
     await addEvent({
       variables: {
         input: {
-          userId: userId,
           title: title,
           date: date,
           hour: hour,
@@ -45,7 +42,6 @@ const Details = (props: any): JSX.Element => {
       },
     })
     .then(() => history.push("/event-list"))
-    .then(() => history.go(0))
     .catch((err)=> {
       console.log(err)
     })

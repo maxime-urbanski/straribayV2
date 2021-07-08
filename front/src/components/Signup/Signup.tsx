@@ -64,7 +64,7 @@ const Signup = () => {
       },
     })
       .catch((err) => console.log(err))
-      .finally(() => history.push("/event-list"));
+      .finally(() => history.push("/"));
   };
 
   return (

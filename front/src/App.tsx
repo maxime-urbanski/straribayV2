@@ -1,7 +1,10 @@
+import React, { createContext, useState } from "react";
 import Router from "./Router";
 import { ThemeProvider } from "styled-components";
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client";
 import { setContext } from '@apollo/client/link/context';
+
+import { UserContext } from "./UserContext";
 
 import theme from "./styles/theme";
 
@@ -22,8 +25,10 @@ const authLink = setContext((_, { headers }) => {
   }
 });
 
-
 const App = (): JSX.Element => {
+  const [userEmail, setUserEmail] = useState("");
+  console.log("App : ", userEmail);
+
   const client = new ApolloClient({
     link: authLink.concat(httpLink),
     cache: new InMemoryCache()
@@ -31,9 +36,11 @@ const App = (): JSX.Element => {
 
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
-        <Router />
-      </ThemeProvider>
+      <UserContext.Provider value={{userEmail, setUserEmail}}>
+        <ThemeProvider theme={theme}>
+          <Router />
+        </ThemeProvider>
+      </UserContext.Provider>
     </ApolloProvider>
   );
 };

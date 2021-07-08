@@ -3,6 +3,11 @@
 import Event from '../models/Event';
 import { IEvent, IInputEvent, IId } from '../interface/event.interface';
 import { EventModel } from '../models/Event';
+import { UserModel } from '../models/User';
+
+export interface Context {
+  user: UserModel;
+}
 
 const eventResolver = {
   Query: {
@@ -10,7 +15,7 @@ const eventResolver = {
       _: unknown,
       parent: any,
       { _id }: { _id: string },
-      context: any
+      context: Context
     ): Promise<EventModel | null> => {
       if (!context) {
         return null;
@@ -18,8 +23,7 @@ const eventResolver = {
       const event = await Event.findOne({ _id });
       return event;
     },
-    getEvents: async (parent: any, args: any, ctx: any) => {
-      console.log('Context', ctx.user);
+    getEvents: async (parent: any, args: any, ctx: Context) => {
       if (ctx.user) {
         const events = await Event.find({});
         return events;
@@ -33,21 +37,23 @@ const eventResolver = {
     addEvent: async (
       _: unknown,
       args: { input: IInputEvent },
-      ctx: any
+      ctx: Context
     ): Promise<EventModel |void> => {
       if (ctx && ctx.user){
         const { firstname, lastname, email } = ctx.user;
-        const event = await Event.create({...args.input, author: {firstname, lastname, email}});
+        const inputs = {...args.input, author: {firstname, lastname, email}}
+        const event = await Event.create(inputs);
         return event;
       }
       
     },
-    deleteEvent: async (_: unknown, args: { input: IId }, ctx: any) => {
+    deleteEvent: async (_: unknown, args: { input: IId }, ctx: Context) => {
       const event = await Event.findOne({ _id: args.input });
       if (!event) throw new Error("This event does not exist");
       if (ctx.user.email === event.author.email) {
         await Event.deleteOne({ _id: args.input });
-      }
+      } 
+      throw Error("You don't created this event !!")
     },
   },
 };

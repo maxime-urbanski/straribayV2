@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { gql, useQuery } from "@apollo/client";
+
 import EventCard from "../EventCard/EventCard";
 import { Title } from "../../styles/elements";
-import { gql, useQuery } from "@apollo/client";
+import { UserContext } from '../../UserContext';
 
 import styles from './eventList.module.css';
 
@@ -21,14 +23,17 @@ interface Props {
   description: string;
   infos: string;
   image: string;
-  valueInputEmail: string;
 }
 
 const GET_EVENTS = gql`
   query GetEvents {
     getEvents {
       _id
-      author
+      author {
+        firstname
+        lastname
+        email
+      }
       title
       date
       hour
@@ -40,9 +45,8 @@ const GET_EVENTS = gql`
   }
 `;
 
-function EventList (props: any) {
+function EventList () {
   const { data, loading, error } = useQuery(GET_EVENTS);
-  // const { loggedEmail } = props.location.state;
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error! {error.message}</p>;
@@ -52,7 +56,7 @@ function EventList (props: any) {
       <Title>List of available events</Title>
       <div className={styles.container}>
         {data.getEvents.map(
-          ({ _id, author, title, theme, date, hour, description, infos, image, valueInputEmail }: Props) => (
+          ({ _id, author, title, theme, date, hour, description, infos, image }: Props) => (
             <EventCard
               key={_id}
               author={author}
@@ -64,7 +68,6 @@ function EventList (props: any) {
               description={description}
               infos={infos}
               image={image}
-              loggedEmail={valueInputEmail}
             />
           )
         )}
