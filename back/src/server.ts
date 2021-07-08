@@ -11,18 +11,8 @@ import User from './models/User';
 
 const app = express();
 const port = 7777;
-// To do: put domain restriction
-app.use(cors());
-/*
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: ({ req }) => ({
-    authScope: getScope(req.headers.authorization)
-  })
-}));
 
-*/
+app.use(cors());
 
 const server = new ApolloServer({
   typeDefs,

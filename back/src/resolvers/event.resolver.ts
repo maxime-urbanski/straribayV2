@@ -9,6 +9,11 @@ export interface Context {
   user: UserModel;
 }
 
+interface EventMail {
+  event: EventModel[];
+  email: string
+}
+
 const eventResolver = {
   Query: {
     getEvent: async (
@@ -23,10 +28,15 @@ const eventResolver = {
       const event = await Event.findOne({ _id });
       return event;
     },
-    getEvents: async (parent: any, args: any, ctx: Context) => {
+    getEvents: async (
+      parent: any, 
+      args: any, 
+      ctx: Context
+      ): Promise<EventMail | void> => {
       if (ctx.user) {
-        const events = await Event.find({});
-        return events;
+        const email = ctx.user.email;
+        const event = await Event.find({});
+        return { event, email };
     } 
     },
   },
@@ -52,8 +62,7 @@ const eventResolver = {
       if (!event) throw new Error("This event does not exist");
       if (ctx.user.email === event.author.email) {
         await Event.deleteOne({ _id: args.input });
-      } 
-      throw Error("You don't created this event !!")
+      } else throw Error("This event doesn't belong to you !")
     },
   },
 };

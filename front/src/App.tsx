@@ -27,7 +27,6 @@ const authLink = setContext((_, { headers }) => {
 
 const App = (): JSX.Element => {
   const [userEmail, setUserEmail] = useState("");
-  console.log("App : ", userEmail);
 
   const client = new ApolloClient({
     link: authLink.concat(httpLink),

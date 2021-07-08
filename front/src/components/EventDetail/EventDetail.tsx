@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { gql, useMutation } from "@apollo/client";
+
+import { GET_EVENTS } from "../EventList/EventList";
 
 import { CreationContainer } from "../../styles/containers";
 import { Title, Button } from "../../styles/elements";
 
-import { gql, useMutation } from "@apollo/client";
 
 const ADD_EVENT = gql`
   mutation AddEvent($input: InputEvent) {
@@ -24,7 +26,9 @@ const Details = (props: any): JSX.Element => {
   let history = useHistory(); 
   const { event, picture } = props.location.state;
   const { title, description, theme, date, hour, info } = event;
-  const [addEvent] = useMutation(ADD_EVENT);
+  const [addEvent] = useMutation(ADD_EVENT, {
+    refetchQueries: mutationResult => [{query: GET_EVENTS}] 
+  });
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();

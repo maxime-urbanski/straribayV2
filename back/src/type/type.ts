@@ -74,7 +74,7 @@ export const typeDefs = gql`
     getUser(_id: String): User
     getUsers: [User]
     getEvent(_id: String): Event
-    getEvents: [Event]
+    getEvents: EventMail
   }
 
   type Mutation {
@@ -88,5 +88,10 @@ export const typeDefs = gql`
   type AuthPayload {
     token: String
     user: User
+  }
+
+  type EventMail {
+    event: [Event]
+    email: String
   }
 `;

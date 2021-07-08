@@ -53,7 +53,6 @@ const Login = () => {
     })      
     .then(() => {
       history.push("/event-list")
-      // history.go(0)
     })
     .catch((err) => console.log(err));
   };

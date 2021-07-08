@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
 
 import EventCard from "../EventCard/EventCard";
@@ -23,30 +23,35 @@ interface Props {
   description: string;
   infos: string;
   image: string;
+  userMail: string;
 }
 
-const GET_EVENTS = gql`
+export const GET_EVENTS = gql`
   query GetEvents {
     getEvents {
-      _id
-      author {
-        firstname
-        lastname
-        email
+      event {
+        _id
+        author {
+          firstname
+          lastname
+          email
+        }
+        title
+        date
+        hour
+        description
+        infos
+        theme
+        image
       }
-      title
-      date
-      hour
-      description
-      infos
-      theme
-      image
+      email
     }
   }
 `;
 
-function EventList () {
+function EventList ({events}: any) {
   const { data, loading, error } = useQuery(GET_EVENTS);
+  console.log('Events',data)
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error! {error.message}</p>;
@@ -55,7 +60,7 @@ function EventList () {
     <>
       <Title>List of available events</Title>
       <div className={styles.container}>
-        {data.getEvents.map(
+        {data && data.getEvents.event.map(
           ({ _id, author, title, theme, date, hour, description, infos, image }: Props) => (
             <EventCard
               key={_id}
@@ -68,6 +73,7 @@ function EventList () {
               description={description}
               infos={infos}
               image={image}
+              userMail={data.getEvents.email}
             />
           )
         )}

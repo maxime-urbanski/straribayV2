@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useLazyQuery } from "@apollo/client";
+
+import { GET_EVENTS } from "./components/EventList/EventList";
 
 import ChooseInfo from "./components/ChooseInfo/ChooseInfo";
 import Home from "./components/Home/Home";
@@ -17,14 +20,16 @@ type RouterWrapper = {
   component: any;
   layout?: any;
   exact?: any;
+  events?: any;
   path: any;
 };
 
 function RouteWrapper({ 
   component: Component,
   layout: Layout,
+  events,
   ...rest
-}: RouterWrapper): JSX.Element {
+}: RouterWrapper) {
 
   return (
     <Route
@@ -56,6 +61,12 @@ function Router() {
         localStorage.clear();
       }
   }
+
+  const [getEvents, { data, loading, error }] = useLazyQuery(GET_EVENTS);
+
+  useEffect(() => {
+    getEvents()
+  }, [window.location])
   
   return (
     <BrowserRouter>

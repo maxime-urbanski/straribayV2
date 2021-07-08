@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useHistory } from "react-router";
 
 import { IAuthor } from '../EventList/EventList';
+import { GET_EVENTS } from "../EventList/EventList";
 
 import { Card, CardBody, CardPicture, CardText, CardButtons } from "../../styles/containers";
 import { Button, CardTitle, Text } from "../../styles/elements";
@@ -22,6 +23,7 @@ export interface IEventCard {
   description: string;
   infos: string;
   image: string;
+  userMail: string;
 }
 
 const DELETE_EVENT = gql`
@@ -42,10 +44,13 @@ const EventCard = ({
   description,
   infos,
   image,
+  userMail,
 }: IEventCard) => {
   const { userEmail } = useContext(UserContext);
   const history = useHistory();
-  const [deleteEvent] = useMutation(DELETE_EVENT);
+  const [deleteEvent] = useMutation(DELETE_EVENT, {
+    refetchQueries: mutationResult => [{query: GET_EVENTS}] 
+  });
   
   const handleDeleteEvent = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -57,7 +62,6 @@ const EventCard = ({
       },
     })
     .catch((err) => console.log(err))
-    // .finally(() => history.go(0));
   }
 
   return (
@@ -66,7 +70,7 @@ const EventCard = ({
       <CardBody>
         <div className={styles.titleContainer}>
           <CardTitle>{title}</CardTitle>
-          { author.email === userEmail && 
+          {author.email === userMail && 
             <button className={styles.button} onClick={handleDeleteEvent}>
               <img  className={styles.cross} src={cross} alt="delete-event"/>
             </button>
