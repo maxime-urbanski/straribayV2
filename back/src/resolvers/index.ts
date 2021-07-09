@@ -1,3 +1,4 @@
+import { IResolvers } from 'apollo-server-express';
 import eventResolver from './event.resolver';
 import userResolver from './user.resolver';
 
@@ -15,4 +16,4 @@ const resolvers = {
   },
 };
 
-export default resolvers;
+export default resolvers as IResolvers;

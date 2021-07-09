@@ -3,8 +3,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import cors from 'cors';
-import { typeDefs } from './type/type';
 import { verify } from 'jsonwebtoken';
+import { typeDefs } from './type/type';
 
 import resolvers from './resolvers';
 import User from './models/User';
