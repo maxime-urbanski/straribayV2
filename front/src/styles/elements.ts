@@ -38,3 +38,12 @@ export const CardTitle = styled.h4`
   color: ${({theme}) => theme.blue};
   margin: 0 0 40px 0;
 `
+export const Logo = styled.img`
+  width: 100px;
+  height: 80px;
+  margin-left: 50px;
+`
+export const LogoCard = styled.img`
+  width: 110px;
+  height: 90px;
+`

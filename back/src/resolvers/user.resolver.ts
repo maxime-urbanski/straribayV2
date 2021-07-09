@@ -8,7 +8,7 @@ import Password from '../service/Password';
 
 dotenv.config();
 
-const secret = process.env.JWT_SECRET;
+const secret = process.env.JWT_SECRET!;
 
 const userResolver = {
   Query: {

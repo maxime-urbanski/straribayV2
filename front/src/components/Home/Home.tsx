@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 
 import ThemeSelect from "../ThemeSelect/ThemeSelect";
 import { CreationContainer } from "../../styles/containers";
-import { Button, Title } from "../../styles/elements";
+import { Button, Title, LogoCard } from "../../styles/elements";
+
+import logo from '../../assets/logo.png'
 
 const Home = (): JSX.Element => {
   const [valueInputTitle, setValueInputTitle] = useState("");
@@ -22,6 +24,7 @@ const Home = (): JSX.Element => {
     <>
       <Title>Create your Event</Title>
       <CreationContainer>
+        <LogoCard src={logo} />
         <h4>Give a title to your event</h4>
         <input value={valueInputTitle} type="text" onChange={handleInput} />
         <h4>Give a theme to your event</h4>

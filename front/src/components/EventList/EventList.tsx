@@ -51,7 +51,6 @@ export const GET_EVENTS = gql`
 
 function EventList ({events}: any) {
   const { data, loading, error } = useQuery(GET_EVENTS);
-  console.log('Events',data)
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error! {error.message}</p>;

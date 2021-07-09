@@ -5,8 +5,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 
-import cors from 'cors';
-
 import { verify } from 'jsonwebtoken';
 import { typeDefs } from './type/type';
 
@@ -19,7 +17,7 @@ const app = express();
 // To do: put domain restriction
 app.use(cors());
 
-const secret = process.env.JWT_SECRET;
+const secret = process.env.JWT_SECRET!;
 const mongoConnection = process.env.MONGO_ADDRESS;
 const dbName = process.env.DB_NAME;
 const mongoPort = process.env.MONGO_PORT;
@@ -32,7 +30,7 @@ const server = new ApolloServer({
     const bearerToken = req.headers.authorization || '';
     if (bearerToken) {
       const token = bearerToken.split(' ')[1];
-      const verifyToken = verify(token, secret);
+      const verifyToken:any = verify(token, secret);
       const user = await User.findOne({ email: verifyToken.email });
       if (!user) throw new AuthenticationError('you must be logged in');
       // if (user) delete user.password;
