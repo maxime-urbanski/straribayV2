@@ -4,6 +4,9 @@ import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
+
+import cors from 'cors';
+
 import { verify } from 'jsonwebtoken';
 import { typeDefs } from './type/type';
 
