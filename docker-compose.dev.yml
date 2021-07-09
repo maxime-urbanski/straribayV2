@@ -1,16 +1,18 @@
-version: '3.3'
+version: "3.3"
 services:
-
   straribay_back:
     command: npm run start
     stdin_open: true
     restart: always
-    volumes: 
+    volumes:
       - ./back/src:/app/src
-    ports: 
-      - ${API_PORT}:7777
-    environment: 
+    ports:
+      - ${SERVER_PORT}:7777
+    environment:
       - NODE_ENV=development
+      - JWT_SECRET=${JWT_SECRET}
+      - DB_NAME=${DB_NAME}
+      - SERVER_PORT=${SERVER_PORT}
 
   straribay_front:
     command: npm run start
@@ -18,8 +20,8 @@ services:
     restart: always
     volumes:
       - ./front/src:/app/src
-    ports: 
-      - ${WEB_CLIENT_PORT}:3000
-    environment: 
+    ports:
+      - ${FRONT_PORT}:3000
+    environment:
       - NODE_ENV=development
-      - REACT_APP_API_BASE_URL=http://localhost:${API_PORT}
+      - REACT_APP_BACK_URL=http://localhost:${SERVER_PORT}

@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-console */
 import jwt from 'jsonwebtoken';
-
+import dotenv from 'dotenv';
 import User from '../models/User';
 import { IUser, InputUser, IAuth } from '../interface/user.interface';
 import Password from '../service/Password';
 
-// const secret = process.env.JWT_SECRET;
-const secret = 'hellolamif';
+dotenv.config();
+
+const secret = process.env.JWT_SECRET;
 
 const userResolver = {
   Query: {
@@ -28,7 +29,6 @@ const userResolver = {
       _: unknown,
       args: { email: string; password: string }
     ): Promise<IAuth> => {
-      console.log('je suis la ');
       let token = '';
       const emailRequest = args.email;
       const passwordRequest = args.password;
@@ -49,7 +49,7 @@ const userResolver = {
           email,
           role,
         };
-        token = jwt.sign(payload, 'tokhein', {
+        token = jwt.sign(payload, secret, {
           expiresIn: '60d',
         });
       }
