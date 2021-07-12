@@ -23,7 +23,7 @@ services:
       - straribay_front-build:/app/build
     environment:
       - NODE_ENV=production
-      - REACT_APP_API_BASE_URL=/api
+      - REACT_APP_BACK_URL=/api
 
   nginx:
     image: nginx:1.19.10
@@ -33,6 +33,7 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - straribay_front-build:/app/build
+      - ./nginx/logs:/var/log/nginx
     depends_on:
       - straribay_front
       - straribay_back
